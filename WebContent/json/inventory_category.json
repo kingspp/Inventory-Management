@@ -1,0 +1,24 @@
+{
+    "inventory": [
+        {
+            "name": "Laptop",
+            "icon": "laptop"
+        },
+        {
+            "name": "Hard Disk",
+            "icon": "hdd-o"
+        },
+        {
+            "name": "Table Tennis Ball",
+            "icon": "circle-o"
+        },
+        {
+            "name": "Dongle",
+            "icon": "signal"
+        },
+        {
+            "name": "Monitor",
+            "icon": "desktop"
+        }
+    ]
+}

@@ -77,6 +77,12 @@
 			<div class="container">
 				<div id="dispAlpha" class="row"></div>
 			</div>
+			<div class="container">
+				<div class="row">
+					<div id="inventory_div">
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 	<footer class="page-footer grey darken-3">
