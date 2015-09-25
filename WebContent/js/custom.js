@@ -5,21 +5,17 @@ $(".version").html(version);
 
 
 $(".user").click( function(){
-	//alert("user");
-	if ($('#dispAlpha').is(':empty')){
-		//$("#dispAlpha").hide();
-		var id = 97;
-		for(i=id ; i< id+26 ; i++){
-			
-			setTimeout(function(){ $("#dispAlpha").append("<a href=\"http://www.google.com\">"+String.fromCharCode(i-32)+"</a>&nbsp&nbsp");}, 10);
-		}
-		
+	$("#dispAlpha").empty();
+	$("#dispAlpha").hide();
+	var id = 97;
+	while(id < (97 + 26)){			
+		$("#dispAlpha").append("<a href=\"http://www.google.com\">"+String.fromCharCode(id-32)+"</a>&nbsp&nbsp");		
+		id++;
 	}
-
+	$("#dispAlpha").slideDown( "slow", function() {});
 });
 
 $(".inventory").click(function(){
-	
-	$("#dispAlpha").empty();
-	
+	$("#dispAlpha").slideUp( "slow", function() {});
+
 });
