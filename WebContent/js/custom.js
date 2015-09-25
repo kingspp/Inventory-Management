@@ -1,12 +1,14 @@
 //Variable Declaration
 var version = "Beta v0.0.1";
 var urlPath = window.location.href+"welcome/hello/query=";
+$('.timer').countTo();
 
 $(".version").html(version); 
 
 
 
 $(".user").click( function(){
+	$("#inventory_div").slideUp( "slow", function() {});
 	$("#dispAlpha").empty();
 	$("#dispAlpha").hide();
 	var id = 97;
@@ -19,10 +21,7 @@ $(".user").click( function(){
 
 $(".inventory").click(function(){
 	$("#dispAlpha").slideUp( "slow", function() {});
-
-});
-
-$(".inventory").click(function(){
+	$("#inventory_div").slideDown( "slow", function() {});
 	$.ajax({
 		url: "json/inventory_category.json",
 		//force to handle it as text
@@ -45,6 +44,8 @@ $(".inventory").click(function(){
 
 		}
 	});
+
 });
+
 
 

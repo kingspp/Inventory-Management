@@ -10,6 +10,9 @@
 
 <link type="text/css" rel="stylesheet" href="css/style.css"
 	media="screen,projection" />
+<link type="text/css" rel="stylesheet"
+	href="fontawesome/css/font-awesome.min.css" />
+
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -50,7 +53,29 @@
 
 	<section class="section">
 		<div class="container">
-			<div class="row center">
+			<div class="row">
+				<!-- MILESTONE -->
+				<div id="milestone" class="milestone">
+					<div class="col s4 offset-s2">
+						<div class="fact">
+							<p class="timer center-align bold" data-to="114" data-speed="10000"></p>
+							<i class="fa fa-4x fa-users center-align"></i>
+							<p>Users</p>
+
+						</div>
+					</div>
+					<div class="col s4 offset-s2">
+						<div class="fact">
+							<p class="timer center-align bold" data-to="252" data-speed="10000"></p>
+							<i class="fa fa-4x fa-shopping-cart "></i>
+							<p>Inventory</p>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+			<div class="row">
 				<div class="col s12 m4 l8">
 					<p>
 						<a class="waves-effect waves-light btn main-menu user "><i
@@ -77,11 +102,11 @@
 			<div class="container">
 				<div id="dispAlpha" class="row"></div>
 			</div>
-			<div class="container">
-				<div class="row">
-					<div id="inventory_div">
-					</div>
-				</div>
+
+		</div>
+		<div class="container">
+			<div class="row">
+				<div id="inventory_div"></div>
 			</div>
 		</div>
 	</section>
@@ -114,7 +139,10 @@
 	<!--Import jQuery before materialize.js-->
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="js/custom.js"></script>
+
+	<script type="text/javascript" src="js/jquery-countTo.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="js/custom.js"></script>
+
 </body>
 </html>
