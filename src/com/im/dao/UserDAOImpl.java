@@ -39,7 +39,7 @@ public class UserDAOImpl implements IUserDAO {
 		Session session = factory.openSession();
 		session.beginTransaction();
 		Query query = session.createQuery("from User where userName like :alphabet");
-		query.setParameter("alphabet", "%" + alphabet + "%");
+		query.setParameter("alphabet",alphabet + "%");
 		List<User> list = query.list();
 		return list;
 	}
