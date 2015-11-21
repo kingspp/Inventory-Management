@@ -6,10 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table( name = "user" )
+@NamedNativeQueries( { @NamedNativeQuery( name = "User.getUsers", query = "select * from user where user_name like :alphabet", resultClass = User.class ) } )
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -17,36 +20,38 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	@Column( name = "user_id" )
-	private int userId;
+	private Integer userId;
+
 	@Column( name = "user_name" )
 	private String userName;
+
+	@Column( name = "gender" )
+	private String gender;
+
+	@Column( name = "doj" )
+	private String dateOfJoining;
+
+	@Column( name = "blood_group" )
+	private String bloodGroup;
+
 	@Column( name = "email_id" )
 	private String emailId;
+
 	@Column( name = "phone_number" )
-	private long phoneNumber;
+	private Long phoneNumber;
+
 	@Column( name = "file_path" )
 	private String filePath;
 
-	public User()
-	{
+	@Column( name = "project" )
+	private String project;
 
-	}
-
-	public User( String name, String email, long number, String path )
-	{
-		userName = name;
-		emailId = email;
-		phoneNumber = number;
-		filePath = path;
-
-	}
-
-	public int getUserId()
+	public Integer getUserId()
 	{
 		return userId;
 	}
 
-	public void setUserId( int userId )
+	public void setUserId( Integer userId )
 	{
 		this.userId = userId;
 	}
@@ -61,24 +66,54 @@ public class User implements Serializable {
 		this.userName = userName;
 	}
 
-	public String getEmaild()
+	public String getGender()
+	{
+		return gender;
+	}
+
+	public void setGender( String gender )
+	{
+		this.gender = gender;
+	}
+
+	public String getDateOfJoining()
+	{
+		return dateOfJoining;
+	}
+
+	public void setDateOfJoining( String dateOfJoining )
+	{
+		this.dateOfJoining = dateOfJoining;
+	}
+
+	public String getBloodGroup()
+	{
+		return bloodGroup;
+	}
+
+	public void setBloodGroup( String bloodGroup )
+	{
+		this.bloodGroup = bloodGroup;
+	}
+
+	public String getEmailId()
 	{
 		return emailId;
 	}
 
-	public void setEmaild( String emaild )
+	public void setEmailId( String emailId )
 	{
-		this.emailId = emaild;
+		this.emailId = emailId;
 	}
 
-	public long getpNumber()
+	public Long getPhoneNumber()
 	{
 		return phoneNumber;
 	}
 
-	public void setpNumber( long pNumber )
+	public void setPhoneNumber( Long phoneNumber )
 	{
-		this.phoneNumber = pNumber;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getFilePath()
@@ -91,14 +126,14 @@ public class User implements Serializable {
 		this.filePath = filePath;
 	}
 
-	/*
-	 * public MultipartFile getImage()
-	 * {
-	 * return image;
-	 * }
-	 * public void setImage( MultipartFile image )
-	 * {
-	 * this.image = image;
-	 * }
-	 */
+	public String getProject()
+	{
+		return project;
+	}
+
+	public void setProject( String project )
+	{
+		this.project = project;
+	}
+
 }

@@ -18,8 +18,7 @@ public class UserDAOImpl extends CustomEntityManager implements IUserDAO {
 	{
 		getEntityManager().persist(user);
 		// implementing it for testing purpose , needs to be changed
-		// session.save(new User("shreesha", "s@gmail.com", 98869,
-		// "here sits the path"));
+
 	}
 
 	@Override
