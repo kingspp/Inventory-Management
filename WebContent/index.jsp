@@ -14,12 +14,14 @@
 	href="fontawesome/css/font-awesome.min.css" />
 
 
+
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
 </head>
 
-<body>
-	<nav class="grey darken-3" role="navigation">
+<body ng-app="imAngular">
+	<nav class=" red darken-4" role="navigation">
 		<div class="nav-wrapper container">
 			<a href="#" class="brand-logo">IMANAGEMENT</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -52,11 +54,156 @@
 	</section>
 
 	<section class="section">
+		
+		 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating black"><i class="material-icons">supervisor_account</i></a></li>      
+      <li><a class="btn-floating green"><i class="material-icons">assessment</i></a></li>
+      <li><a class="btn-floating dark-blue"><i class="material-icons">visibility</i></a></li>
+    </ul>
+  </div>
+  </div>
+  
+  
+  
 		<div class="container">
-			<div class="row">
+		
+		<div class="row tab">
+			 
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a href="#test1"><i
+							class="material-icons right" style="padding-top:15px;margin-right:15px">supervisor_account</i>Users</a></li>
+        <li class="tab col s3"><a class="active" href="#test2"><i
+							class="material-icons right" style="padding-top:15px;margin-right:15px">assessment</i>Inventory</a></li>        
+        <li class="tab col s3"><a href="#test3"><i
+							class="material-icons right" style="padding-top:15px; margin-right:15px">visibility</i>Details</a></li>
+      </ul>
+    </div>
+    <div id="test1" class="col s12">	<div class="container" ng-controller="imUserController"><div class="row">
+					<div class="s12 col">						
+						<br>
+						<form class="forms forms-inline input-field ">
+						<div>
+							<input type="text" class="input-big width-50" id="query" ng-model="query">
+							<label for="query">Search Users</label>
+								</div>
+						</form>
+						<ul class="collection">
+							<li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="u in users | filter:query | orderBy:'user.username'">
+								<a href="" ng-click="modalDetails(u.user)" class="modal-trigger title"><img ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle"> {{u.user.username}}</a>
+								<p>{{u.user.location.city}}, {{u.user.location.state}}</p>
+								<a href="#!" class="secondary-content" ng-click="removeUser(u)"><i class="small mdi-action-highlight-remove"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div id="modalDetailsUser" class="modal bottom-sheet">
+					<div class="modal-content">
+						<div class="row">
+							<div class="l2 col">
+								<img ng-src="{{user.picture.medium}}" alt="" class="align-right circle">
+							</div>
+							<div class="l10 col">
+								<h2>{{user.username}}</h2>
+								<label>Email</label> {{user.email}} <br/>								
+								<label>Phone</label> {{user.phone}} <br/>
+								<label>Project</label>
+								<hr>																
+								<label>Blood Group</label>  <br/>								
+								<label>Date of Joining</label> {{user.dob}} <br/>
+								<hr>
+								<a><i class="material-icons">add</i> Add Inventory</a><a>&nbsp&nbsp<i class="material-icons">done</i>Inventory Return</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div></div>
+    <div id="test2" class="col s12">	<div class="container" ng-controller="imInvController"><div class="row">
+					<div class="s12 col">						
+						<br>
+						<form class="forms forms-inline input-field ">
+						<div>
+							<input type="text" class="input-big width-50" id="query" ng-model="query">
+							<label for="query">Search Users</label>
+								</div>
+						</form>
+						<ul class="collection">
+							<li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="u in users | filter:query | orderBy:'user.username'">
+								<a href="" ng-click="modalDetails(u.user)" class="modal-trigger title"><img ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle"> {{u.user.username}}</a>
+								<p>{{u.user.location.city}}, {{u.user.location.state}}</p>
+								<a href="#!" class="secondary-content" ng-click="removeUser(u)"><i class="small mdi-action-highlight-remove"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div id="modalDetailsInv" class="modal bottom-sheet">
+					<div class="modal-content">
+						<div class="row">
+							<div class="l2 col">
+								<img ng-src="{{user.picture.medium}}" alt="" class="align-right circle">
+							</div>
+							<div class="l10 col">
+								<h2>{{user.username}}</h2>
+								<label>Type</label> {{user.email}} <br/>								
+								<label>Price</label> {{user.phone}} <br/>
+								<hr>																
+								<label>Serial Number</label>  <br/>								
+								<label>Date of Purchase</label> {{user.dob}} <br/> 								
+								<hr>
+								<a><i class="material-icons">add</i> Add Inventory</a><a>&nbsp&nbsp<i class="material-icons">done</i>Inventory Return</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div></div>    
+    <div id="test3" class="col s12">	<div class="container" ng-controller="imDetailController"><div class="row">
+					<div class="s12 col">						
+						<br>
+						<form class="forms forms-inline input-field ">
+						<div>
+							<input type="text" class="input-big width-50" id="query" ng-model="query">
+							<label for="query">Search Details</label>
+								</div>
+						</form>
+						<ul class="collection">
+							<li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="u in users | filter:query | orderBy:'user.username'">
+								<a href="" ng-click="modalDetails(u.user)" class="modal-trigger title"><img ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle"> {{u.user.username}}</a>
+								<p>{{u.user.location.city}}, {{u.user.location.state}}</p>
+								<a href="#!" class="secondary-content" ng-click="removeUser(u)"><i class="small mdi-action-highlight-remove"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div id="modalDetails" class="modal bottom-sheet">
+					<div class="modal-content">
+						<div class="row">
+							<div class="l2 col">
+								<img ng-src="{{user.picture.medium}}" alt="" class="align-right circle">
+							</div>
+							<div class="l10 col">
+								<h2>{{user.username}}</h2>
+								<label>Email</label> {{user.email}} <br/>
+								<label>Password</label> {{user.password}}
+								<hr>
+								<label>Phone</label> {{user.phone}} <br/>
+								<label>Location</label> {{user.location.city}}, {{user.location.state}} <br/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div></div>
+  
+			</div>
+		
+		<div class="container">
+			<div class="row center">
 				<!-- MILESTONE -->
 				<div id="milestone" class="milestone">
-					<div class="col s4 offset-s2">
+					<div class="col s3 offset-s4">
 						<div class="fact">
 							<p class="timer center-align bold" data-to="114" data-speed="10000"></p>
 							<i class="fa fa-4x fa-users center-align"></i>
@@ -64,7 +211,7 @@
 
 						</div>
 					</div>
-					<div class="col s4 offset-s2">
+					<div class="col s3 offset-s2 ">
 						<div class="fact">
 							<p class="timer center-align bold" data-to="252" data-speed="10000"></p>
 							<i class="fa fa-4x fa-shopping-cart "></i>
@@ -72,33 +219,41 @@
 						</div>
 
 					</div>
-
-				</div>
-			</div>
-			<div class="row">
-				<div class="col s12 m4 l8">
-					<p>
-						<a class="waves-effect waves-light btn main-menu user "><i
+				<!--	<div class="col s3" style="padding-top:50px">
+						<a class="waves-effect waves-light btn  main-menu user" style="display:block"><i
 							class="material-icons right">supervisor_account</i>Users</a> <a
-							class="waves-effect waves-light btn main-menu inventory"><i
+							class="waves-effect waves-light btn  main-menu inventory" style="display:block"><i
 							class="material-icons right">assessment</i>Inventory</a> <a
-							class="waves-effect waves-light btn main-menu details"><i
+							class="waves-effect waves-light btn  main-menu details" style="display:block"><i
 							class="material-icons right">visibility</i>Details</a>
-				</div>
+			
+			</div> 	-->		
 
-				<div class="col s12 m4 l4">
-					<form>
+				</div>
+			
+				
+			</div>
+			</div>
+			
+			
+			
+			
+		
+					<!--<form>
 						<div class="input-field">
 							<input type="search" id="search-field" class="field" required
 								maxlength=""> <label for="search-field"><i
 								class="mdi-action-search"></i></label> <i
 								class="mdi-navigation-close close"></i>
 						</div>
-					</form>
-				</div>
+					</form> -->
+								
+			
+			
+	
 
 
-			</div>
+			
 			<div class="container">
 				<div id="dispAlpha" class="row"></div>
 			</div>
@@ -137,12 +292,15 @@
 		</div>
 	</footer>
 	<!--Import jQuery before materialize.js-->
-	<script type="text/javascript"
-		src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	
 
+		<script type="text/javascript"
+		src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery-countTo.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript" src="js/custom.js"></script>
+
 
 </body>
 </html>
