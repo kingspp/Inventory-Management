@@ -1,28 +1,25 @@
 package com.im.dao;
 
 import java.util.List;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import javax.persistence.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import com.im.beans.User;
+import com.im.utils.CustomEntityManager;
 
-@Component
-public class UserDAOImpl implements IUserDAO {
+@Repository
+@Transactional
+public class UserDAOImpl extends CustomEntityManager implements IUserDAO {
 
-	@Autowired
-	SessionFactory factory;
+	Query query;
 
 	@Override
-	public void insertUser()
+	public void insertUser( User user )
 	{
-		System.out.println("in insertUser DAO");
-		Session session = factory.openSession();
-		session.beginTransaction();
+		getEntityManager().persist(user);
 		// implementing it for testing purpose , needs to be changed
-		session.save(new User("shreesha", "s@gmail.com", 98869));
-		session.getTransaction().commit();
+		// session.save(new User("shreesha", "s@gmail.com", 98869,
+		// "here sits the path"));
 	}
 
 	@Override
@@ -35,12 +32,9 @@ public class UserDAOImpl implements IUserDAO {
 	@SuppressWarnings( "unchecked" )
 	public List<User> getAllUsersDao( char alphabet )
 	{
-		System.out.println("inside UserDao");
-		Session session = factory.openSession();
-		session.beginTransaction();
-		Query query = session.createQuery("from User where userName like :alphabet");
-		query.setParameter("alphabet",alphabet + "%");
-		List<User> list = query.list();
+		query = getEntityManager().createNativeQuery("select * from user where user_name like :alphabet", User.class);
+		query.setParameter("alphabet", alphabet + "%");
+		List<User> list = query.getResultList();
 		return list;
 	}
 }

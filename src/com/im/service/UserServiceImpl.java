@@ -4,19 +4,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.im.beans.User;
-import com.im.dao.UserDAOImpl;
+import com.im.dao.IUserDAO;
 
 @Service
 public class UserServiceImpl implements IUserService {
 
 	@Autowired
-	UserDAOImpl userDao;
+	IUserDAO userDao;
 
 	@Override
-	public void insertUser()
+	public void insertUser( User user )
 	{
 		System.out.println("in insertUser service");
-		userDao.insertUser();
+		userDao.insertUser(user);
 
 	}
 
@@ -29,7 +29,6 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public List<User> getAllUsers( char alphabet )
 	{
-		System.out.println("userService");
 		List<User> list = userDao.getAllUsersDao(alphabet);
 		return list;
 	}

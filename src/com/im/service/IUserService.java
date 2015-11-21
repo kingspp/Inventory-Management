@@ -5,7 +5,7 @@ import com.im.beans.User;
 
 public interface IUserService {
 
-	public void insertUser();
+	public void insertUser( User user );
 
 	public void deleteUser();
 
