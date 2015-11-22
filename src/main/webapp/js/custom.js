@@ -1,7 +1,7 @@
 //Variable Declaration
 
 
-var version = "Beta v0.1.1";
+var version = "Beta v0.1.3";
 var urlPath = window.location.href+"welcome/hello/";
 $('.timer').countTo();
 
