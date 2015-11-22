@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>IManagement</title>
 		<!--Import Google Icon Font-->
 		<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 		rel="stylesheet">
@@ -60,9 +61,9 @@
 					<i class="large material-icons">mode_edit</i>
 				</a>
 				<ul>
-					<li><a class="btn-floating modal-trigger purple" href="#modal1"><i class="material-icons">supervisor_account</i></a></li>    					
-					<li><a class="btn-floating green"><i class="material-icons">assessment</i></a></li>
-					<li><a class="btn-floating indigo"><i class="material-icons">visibility</i></a></li>
+					<li><a class="btn-floating modal-trigger purple" href="#userModal"><i class="material-icons">supervisor_account</i></a></li>    					
+					<li><a class="btn-floating modal-trigger green"  href="#invModal"><i class="material-icons">assessment</i></a></li>
+					<li><a class="btn-floating modal-trigger indigo" ><i class="material-icons">visibility</i></a></li>
 				</ul>
 			</div>
 		</div>
@@ -268,72 +269,72 @@
 	
 	<!-- modals -->
 	<!-- Modal Structure -->
-	
-	<div id="modal1" class="modal bottom-sheet">
+	<!-- User Modal>-->
+	<div id="userModal" class="modal bottom-sheet">
 		<div class="modal-content">
-			<h4><i class="fa fa-user-plus"></i> User</h4>
+			<h4><i class="fa fa-user-plus" style="font-size: 24px;"></i> User</h4>
 			<div class="container">
 				<div class="row">
 					<form class="col s12">
-						<div class="row">
-							
-							<div class="file-field input-field col s1">
+						<div class="col s2">
+							<div class="row">								
+								<div class="file-field input-field col s1">	
+									<div class="image-upload">
+										<label for="file-input">
+											<img id="image" src="img/sample-user.png"/>
+										</label>									
+										<input id="file-input" type="file"/>
+									</div>	
+								</div>
+							</div> 
+						</div>
+						
+						<div class="col s9">
+							<div class="row">
+								<div class="input-field col s5">
+									<i class="material-icons prefix">account_circle</i>
+									<input id="first_name" type="text" class="validate">
+									<label for="first_name">First Name</label>
+								</div>
+								<div class="input-field col s4">
+									<input id="last_name" type="text" class="validate">
+									<label for="last_name">Last Name</label>
+								</div>
+							</div>
+							<div class="row">								
+								<div class="input-field col s9">
+									<i class="material-icons prefix">email</i>
+									<input id="email" type="email" class="validate">
+									<label for="email">Email</label>
+								</div>								
+							</div>
+							<div class="row">														
+								<div class="input-field col s9">
+									<i class="material-icons prefix">phone</i>
+									<input id="ph" type="number" class="validate">
+									<label for="ph">Ph Number</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s5">								
+								<i class="material-icons prefix">perm_contact_calendar</i>
+									<input type="date" class="datepicker">
+									<label for="birthdate" class="">Birthdate</label>								
+								</div>					
 								
-								
-								
-								<div class="image-upload">
-									<label for="file-input">
-										<img id="image" src="img/sample-user.png"/>
-									</label>
-									
-									<input id="file-input" type="file"/>
+								<div class="input-field col s4">
+								<i class="material-icons prefix">invert_colors</i>
+									<input id="bloodGroup" type="text" class="validate">
+									<label for="bloodGroup">Blood group</label>
 								</div>
 								
-								
 							</div>
-							
-							<div class="input-field col s3">
-								<input id="first_name" type="text" class="validate">
-								<label for="first_name">First Name</label>
-							</div>
-							<div class="input-field col s3">
-								<input id="last_name" type="text" class="validate">
-								<label for="last_name">Last Name</label>
-							</div>
-						</div>  
-						<div class="row">
-							<div class="col s1">
-							</div>
-							<div class="input-field col s7 offset-s4">
-								<input id="email" type="email" class="validate">
-								<label for="email">Email</label>
-							</div>
-							
-						</div>
-						<div class="row">						
-							
-							<div class="input-field col s3">
-								<input id="ph" type="number" class="validate">
-								<label for="ph">Ph Number</label>
-							</div>
-							
-							<div class="input-field col s2">
-								<input type="date" class="datepicker">
-								<label for="birthdate" class="">Birthdate</label>
-								
-							</div>
-							
-							
-							<div class="input-field col s2">
-								<input id="bloodGroup" type="text" class="validate">
-								<label for="bloodGroup">Blood group</label>
-							</div>
-							
-						</div>
-						<div class="row">
-							<div class="input-field col s7">
-							<input id="project" type="text" class="validate">
-								<label for="project">Project</label>
+							<div class="row">
+								<div class="input-field col s9">
+								<i class="material-icons prefix">code</i>
+									<input id="project" type="text" class="validate">
+									<label for="project">Project</label>
+								</div>
 							</div>
 						</div>
 					</form>
@@ -341,7 +342,65 @@
 			</div>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+			<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+		</div>
+	</div>
+</div>
+
+
+<!--Inventory Modal-->
+<div id="invModal" class="modal bottom-sheet">
+		<div class="modal-content">
+			<h4><i class="material-icons">queue</i></i> Inventory</h4>
+			<div class="container">
+				<div class="row">
+					<form class="col s12">
+						<div class="col s2">
+							<div class="row">								
+								<div class="file-field input-field col s1">	
+									<div class="image-upload">
+										<label for="file-input">
+											<img id="image" src="img/sample-user.png"/>
+										</label>									
+										<input id="file-input" type="file"/>
+									</div>	
+								</div>
+							</div> 
+						</div>
+						
+						<div class="col s9">
+							<div class="row">
+								<div class="input-field col s5">
+									<i class="material-icons prefix">shopping_basket</i>
+									<input id="inventory_name" type="text" class="validate">
+									<label for="inventory_name">First Name</label>
+								</div>
+								<div class="input-field col s4">
+									<input id="type" type="text" class="validate">
+									<label for="type">Type</label>
+								</div>
+							</div>
+							<div class="row">								
+								<div class="input-field col s9">
+									<i class="material-icons prefix">info_outline</i>
+									<input id="snumber" type="text" class="validate">
+									<label for="snumber">Serial Number</label>
+								</div>								
+							</div>						
+							<div class="row">
+								<div class="input-field col s9">								
+								<i class="material-icons prefix">perm_contact_calendar</i>
+									<input type="date" class="datepicker">
+									<label for="DOP" class="">Date of Purchase</label>								
+								</div>
+							</div>							
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
 		</div>
 	</div>
 </div>
