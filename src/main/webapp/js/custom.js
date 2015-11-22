@@ -1,14 +1,28 @@
 //Variable Declaration
 
 
-var version = "Beta v0.0.1";
+var version = "Beta v0.1.1";
 var urlPath = window.location.href+"welcome/hello/";
 $('.timer').countTo();
 
 $(".version").html(version);
 
 
+$(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+	
 
+	
+  });
+
+
+
+	$('.datepicker').pickadate({
+	 container: 'body',
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
 
 $(".user").click( function(){
 	$("#inventory_div").slideUp( "slow", function() {});
@@ -113,6 +127,21 @@ imAngular.controller('imDetailController', function ($scope, $http){
   };
   
 });
+
+
+
+document.getElementById("file-input").onchange = function () {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("image").src = e.target.result;
+		
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+};
 
 
 
