@@ -26,10 +26,9 @@ public class UserDAOImpl extends CustomEntityManager implements IUserDAO {
 	}
 
 	@SuppressWarnings( "unchecked" )
-	public List<User> getAllUsersDao( char alphabet )
+	public List<User> getAllUsersDao()
 	{
-		query = getEntityManager().createNativeQuery("select * from user where user_name like :alphabet", User.class);
-		query.setParameter("alphabet", alphabet + "%");
+		query = getEntityManager().createNativeQuery("select * from user ", User.class);
 		List<User> list = query.getResultList();
 		return list;
 	}

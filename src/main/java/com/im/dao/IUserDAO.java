@@ -9,6 +9,6 @@ public interface IUserDAO {
 
 	public void deleteUser();
 
-	public List<User> getAllUsersDao( char alphabet );
+	public List<User> getAllUsersDao();
 
 }

@@ -24,9 +24,9 @@ public class UserServiceImpl implements IUserService {
 
 	}
 
-	public List<User> getAllUsers( char alphabet )
+	public List<User> getAllUsers()
 	{
-		List<User> list = userDao.getAllUsersDao(alphabet);
+		List<User> list = userDao.getAllUsersDao();
 		return list;
 	}
 

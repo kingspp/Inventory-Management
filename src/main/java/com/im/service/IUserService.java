@@ -9,6 +9,6 @@ public interface IUserService {
 
 	public void deleteUser();
 
-	public List<User> getAllUsers( char alphabet );
+	public List<User> getAllUsers();
 
 }

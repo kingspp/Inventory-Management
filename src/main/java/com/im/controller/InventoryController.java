@@ -1,12 +1,13 @@
 package com.im.controller;
 
 import java.util.List;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,25 +37,43 @@ public class InventoryController {
 		return "success";
 	}
 
-	@RequestMapping( value = "/getUsers/{queryString}", method = RequestMethod.GET )
+	@SuppressWarnings( "unchecked" )
+	@RequestMapping( value = "/getUsers", method = RequestMethod.GET )
 	public @ResponseBody
-	List<User> getAllUsers( @PathVariable( "queryString" )
-	Character alphabet ) throws Exception
+	JSONObject getAllUsers() throws Exception
 	{
 		try
 		{
-			if( alphabet == null )
+			List<User> list = userService.getAllUsers();
+			if( list.isEmpty() || list.size() <= 0 )
 			{
-				throw new CustomGenericException("Please pass a alphabet");
+				throw new CustomGenericException("There are no users registered");
 			}
-			else
+			JSONObject j = null;
+			JSONArray userArray = new JSONArray();
+			JSONObject user = null;
+			JSONObject results = new JSONObject();
+			for( int i = 0; i < list.size(); i++ )
 			{
-				List<User> list = userService.getAllUsers(alphabet);
-				return list;
+				j = new JSONObject();
+				j.put("userName", list.get(i).getUserName());
+				j.put("userId", list.get(i).getUserId());
+				j.put("emailId", list.get(i).getEmailId());
+				j.put("bloodGroup", list.get(i).getBloodGroup());
+				j.put("project", list.get(i).getProject());
+				j.put("gender", list.get(i).getGender());
+				j.put("phoneNumber", list.get(i).getPhoneNumber());
+				user = new JSONObject();
+				user.put("user", j);
+				userArray.add(user);
 			}
 
+			results.put("results", userArray);
+			System.out.println(results);
+			return results;
+
 		}
-		catch( CustomGenericException e )
+		catch( Exception e )
 		{
 			e.printStackTrace();
 			throw e;
