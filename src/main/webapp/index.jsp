@@ -94,9 +94,9 @@
 							</div>
 						</form>
 						<ul class="collection">
-							<li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="u in users | filter:query | orderBy:'user.username'">
-								<a href="" ng-click="modalDetails(u.user)" class="modal-trigger title"><img ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle"> {{u.user.username}}</a>
-								<p>{{u.user.location.city}}, {{u.user.location.state}}</p>
+							<li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="u in users | filter:query | orderBy:'user.userName'">
+								<a href="" ng-click="modalDetails(u.user)" class="modal-trigger title"><img ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle"> {{u.user.userName}}</a>
+								<p>{{u.user.emailId}}, {{u.user.phoneNumber}}</p>
 								<a href="#!" class="secondary-content" ng-click="removeUser(u)"><i class="small mdi-action-highlight-remove"></i></a>
 							</li>
 						</ul>
@@ -109,12 +109,12 @@
 								<img ng-src="{{user.picture.medium}}" alt="" class="align-right circle">
 							</div>
 							<div class="l10 col">
-								<h2>{{user.username}}</h2>
-								<label>Email</label> {{user.email}} <br/>								
-								<label>Phone</label> {{user.phone}} <br/>
-								<label>Project</label>
+								<h2>{{user.userName}}</h2>
+								<label>Email</label> {{user.emailId}} <br/>								
+								<label>Phone</label> {{user.phoneNumber}} <br/>
+								<label>Project</label> {{user.project}} <br/>
 								<hr>																
-								<label>Blood Group</label>  <br/>								
+								<label>Blood Group</label> {{user.bloodGroup}}  <br/>								
 								<label>Date of Joining</label> {{user.dob}} <br/>
 								<hr>
 								<a><i class="material-icons">add</i> Add Inventory</a><a>&nbsp&nbsp<i class="material-icons">done</i>Inventory Return</a>

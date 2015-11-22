@@ -73,7 +73,7 @@ $(".inventory").click(function(){
 var imAngular = angular.module('imAngular', []);
 imAngular.controller('imUserController', function ($scope, $http){
   
-  $http.get('http://api.randomuser.me/?results=1').success(function(data) {
+  $http.get('http://localhost:9876/rest/getUsers').success(function(data) {
     $scope.users = data.results;
   }).error(function(data, status) {
     alert('get data error!');
