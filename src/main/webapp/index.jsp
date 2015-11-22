@@ -302,26 +302,39 @@
 							</div>
 						</div>  
 						<div class="row">
-							<div class="input-field col s6 offset-s4">
+							<div class="col s1">
+							</div>
+							<div class="input-field col s7 offset-s4">
 								<input id="email" type="email" class="validate">
 								<label for="email">Email</label>
 							</div>
 							
 						</div>
-						<div class="row">
-							<div class="input-field col s3 offset-s2">
-								<input type="date" class="datepicker">
-								<label for="birthdate" class="">Birthdate</label>
-								
-							</div>
+						<div class="row">						
+							
 							<div class="input-field col s3">
 								<input id="ph" type="number" class="validate">
 								<label for="ph">Ph Number</label>
 							</div>
 							
+							<div class="input-field col s2">
+								<input type="date" class="datepicker">
+								<label for="birthdate" class="">Birthdate</label>
+								
+							</div>
+							
+							
+							<div class="input-field col s2">
+								<input id="bloodGroup" type="text" class="validate">
+								<label for="bloodGroup">Blood group</label>
+							</div>
+							
 						</div>
 						<div class="row">
-							
+							<div class="input-field col s7">
+							<input id="project" type="text" class="validate">
+								<label for="project">Project</label>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -333,49 +346,49 @@
 	</div>
 </div>
 
-		
-		
-		
-		
-		
-		<footer class="page-footer grey darken-3">
-			<!-- <div class="container">
-				<div class="row">
-				<div class="col l6 s12">
-				<h5 class="white-text">Footmagentaer Content</h5>
-				<p class="grey-text text-lighten-4">You can use rows and
-				columns here to organize your footer content.</p>
-				</div>
-				<div class="col l4 offset-l2 s12">
-				<h5 class="white-text">Links</h5>
-				<ul>
-				<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-				<li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-				<li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-				<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-				</ul>
-				</div>
-				</div>
-			</div>  -->
-			
-			
-			<div class="footer-copyright">
-				<div class="container center">
-					© 2014 Copyright @Razorthink <a
-					class="grey-text text-lighten-4 right version" href="#!"></a>
-				</div>
-			</div>
-		</footer>
-		<!--Import jQuery before materialize.js-->
-		
-		
-		<script type="text/javascript"
-		src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="js/jquery-countTo.js"></script>
-		<script type="text/javascript" src="js/angular.min.js"></script>
-		<script type="text/javascript" src="js/materialize.min.js"></script>
-		<script type="text/javascript" src="js/custom.js"></script>
-		
-		
+
+
+
+
+
+<footer class="page-footer grey darken-3">
+	<!-- <div class="container">
+		<div class="row">
+		<div class="col l6 s12">
+		<h5 class="white-text">Footmagentaer Content</h5>
+		<p class="grey-text text-lighten-4">You can use rows and
+		columns here to organize your footer content.</p>
+		</div>
+		<div class="col l4 offset-l2 s12">
+		<h5 class="white-text">Links</h5>
+		<ul>
+		<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+		<li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+		<li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+		<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+		</ul>
+		</div>
+		</div>
+	</div>  -->
+	
+	
+	<div class="footer-copyright">
+		<div class="container center">
+			© 2014 Copyright @Razorthink <a
+			class="grey-text text-lighten-4 right version" href="#!"></a>
+		</div>
+	</div>
+</footer>
+<!--Import jQuery before materialize.js-->
+
+
+<script type="text/javascript"
+src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-countTo.js"></script>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+
+
 </body>
 </html>
