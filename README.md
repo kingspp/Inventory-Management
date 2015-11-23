@@ -1,9 +1,7 @@
-![alt tag](https://raw.github.com/dogfalo/materialize/master/images/materialize.gif)
-===========
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Dogfalo/materialize?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-Materialize, a CSS Framework based on material design
+![Jquery](https://brand.jquery.org/resources/jquery-mark-light.gif)<br>
+![Font Awesome](http://static.jeremybuff.com/img/credits-fontawesome.png)<br>
+![AngularJS](https://angularjs.org/img/AngularJS-large.png)<br>
+![Materialize CSS](https://raw.github.com/dogfalo/materialize/master/images/materialize.gif)<br>
 
-### Current Version : v0.97.0
 
-![](https://angularjs.org/img/AngularJS-large.png)
