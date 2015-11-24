@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table( name = "inventory" )
-@NamedNativeQueries( { @NamedNativeQuery( name = "User.getInventories", query = "select * from inventory ", resultClass = Inventory.class ) } )
+@NamedNativeQueries( { @NamedNativeQuery( name = "Inventory.getInventories", query = "select * from inventory ", resultClass = Inventory.class ) } )
 public class Inventory {
 
 	@Id
