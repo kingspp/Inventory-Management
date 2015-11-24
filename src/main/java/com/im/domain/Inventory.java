@@ -1,14 +1,17 @@
-package com.im.beans;
+package com.im.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table( name = "inventory" )
+@NamedNativeQueries( { @NamedNativeQuery( name = "User.getInventories", query = "select * from inventory ", resultClass = Inventory.class ) } )
 public class Inventory {
 
 	@Id

@@ -3,8 +3,8 @@ package com.im.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.im.beans.User;
 import com.im.dao.IUserDAO;
+import com.im.domain.User;
 
 @Service
 public class UserServiceImpl implements IUserService {

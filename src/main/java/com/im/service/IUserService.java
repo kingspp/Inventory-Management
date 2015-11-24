@@ -1,7 +1,7 @@
 package com.im.service;
 
 import java.util.List;
-import com.im.beans.User;
+import com.im.domain.User;
 
 public interface IUserService {
 

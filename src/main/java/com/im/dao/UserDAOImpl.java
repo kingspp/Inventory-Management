@@ -4,7 +4,7 @@ import java.util.List;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import com.im.beans.User;
+import com.im.domain.User;
 import com.im.utils.CustomEntityManager;
 
 @Repository
@@ -28,7 +28,7 @@ public class UserDAOImpl extends CustomEntityManager implements IUserDAO {
 	@SuppressWarnings( "unchecked" )
 	public List<User> getAllUsersDao()
 	{
-		query = getEntityManager().createNativeQuery("select * from user ", User.class);
+		query = getEntityManager().createNamedQuery("User.getUsers");
 		List<User> list = query.getResultList();
 		return list;
 	}

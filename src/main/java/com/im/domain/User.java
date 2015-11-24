@@ -1,4 +1,4 @@
-package com.im.beans;
+package com.im.domain;
 
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table( name = "user" )
-@NamedNativeQueries( { @NamedNativeQuery( name = "User.getUsers", query = "select * from user where user_name like :alphabet", resultClass = User.class ) } )
+@NamedNativeQueries( { @NamedNativeQuery( name = "User.getUsers", query = "select * from user ", resultClass = User.class ) } )
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
