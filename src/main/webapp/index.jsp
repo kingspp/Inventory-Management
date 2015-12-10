@@ -70,7 +70,7 @@
 						class="material-icons">visibility</i></a></li>
 			</ul>
 		</div>
-		</div>
+
 
 
 
@@ -134,8 +134,12 @@
 										<label>Blood Group</label> {{user.bloodGroup}} <br /> <label>Date
 											of Joining</label> {{user.dob}} <br />
 										<hr>
-										<a class="waves-effect waves-light btn-small modal-trigger" href="#addInventoryModal"><i class="material-icons">add</i>Add Inventory</a>&nbsp&nbsp
-										<a class="waves-effect waves-light btn-small modal-trigger" href="#returnInventoryModal"><i class="material-icons">add</i>Return Inventory</a>&nbsp&nbsp
+										<a class="waves-effect waves-light btn-small modal-trigger"
+											href="#addInventoryModal"><i class="material-icons">add</i>Add
+											Inventory</a>&nbsp&nbsp <a
+											class="waves-effect waves-light btn-small modal-trigger"
+											href="#returnInventoryModal"><i class="material-icons">add</i>Return
+											Inventory</a>&nbsp&nbsp
 									</div>
 								</div>
 							</div>
@@ -320,11 +324,12 @@
 			</h4>
 			<div class="container">
 				<div class="row">
-					<form class="col s12">
+					<form id="userForm" action="studentFormInsert.php" title=""
+						method="post">
 						<div class="col s2">
 							<div class="row">
 								<div class="file-field input-field col s1">
-									<div class="image-upload">
+									<div class="image-upload form-field">
 										<label for="file-input"> <img id="image"
 											src="img/sample-user.png" />
 										</label> <input id="file-input" type="file" />
@@ -336,59 +341,86 @@
 						<div class="col s9">
 							<div class="row">
 								<div class="input-field col s5">
-									<i class="material-icons prefix">account_circle</i> <input
-										id="first_name" type="text" class="validate"> <label
-										for="first_name">First Name</label>
+									<div class="form-field">
+										<i class="material-icons prefix">account_circle</i> <label
+											class="title">First Name</label> <input type="text"
+											id="firstName" class="validate" required>
+									</div>
 								</div>
+
 								<div class="input-field col s4">
-									<input id="last_name" type="text" class="validate"> <label
-										for="last_name">Last Name</label>
+									<div class="form-field">
+										<input id="lastName" type="text" class="validate" required>
+										<label for="lastName">Last Name</label>
+									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s9">
 									<i class="material-icons prefix">email</i> <input id="email"
-										type="email" class="validate"> <label for="email">Email</label>
+										type="email" class="validate" required> <label
+										for="email">Email</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s9">
 									<i class="material-icons prefix">phone</i> <input id="ph"
-										type="number" class="validate"> <label for="ph">Ph
-										Number</label>
+										type="number" class="validate" required> <label
+										for="ph">Ph Number</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s5">
 									<i class="material-icons prefix">perm_contact_calendar</i> <input
-										type="date" class="datepicker"> <label for="birthdate"
-										class="">Birthdate</label>
+										type="date" class="datepicker" required> <label
+										for="birthdate" class="">Birthdate</label>
 								</div>
 
 								<div class="input-field col s4">
 									<i class="material-icons prefix">invert_colors</i> <input
-										id="bloodGroup" type="text" class="validate"> <label
-										for="bloodGroup">Blood group</label>
+										id="bloodGroup" type="text" pattern="[a-zA-Z][+-]"
+										class="validate" required> <label for="bloodGroup">Blood
+										group</label>
 								</div>
 
 							</div>
 							<div class="row">
 								<div class="input-field col s9">
 									<i class="material-icons prefix">code</i> <input id="project"
-										type="text" class="validate"> <label for="project">Project</label>
+										type="text" class="validate" required> <label
+										for="project">Project</label>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col s1">
+									<i class="material-icons prefix" style="padding-right: 20px;">person_pin</i>
+								</div>
+								<div class="col s3">
+									<div class="input-field">
+
+										<select class="icons">
+											<option value="" disabled selected>Choose your
+												option</option>
+											<option value="male" data-icon="img/male.png"
+												class="left circle">Male</option>
+											<option value="female" data-icon="img/female.jpg"
+												class="left">Female</option>
+										</select><label>Gender</label>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div id="userSubmit" class="modal-footer">
+							<button type="submit"
+								class="modal-action  waves-effect waves-green btn-flat">Submit</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-		<div class="modal-footer">
-			<a href="#!"
-				class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
-		</div>
 	</div>
-	</div>
+
 
 
 	<!--Inventory Modal-->
@@ -449,119 +481,119 @@
 		</div>
 	</div>
 
- 
+
 	<!--  Map user to inventory modal -->
 	<div id="addInventoryModal" class="modal">
 		<div class="modal-content">
 			<h4>Add Inventory</h4>
 			<p>A bunch of text</p>
 		</div>
-				<div id="test2" class="col s12">
-					<div class="container" ng-controller="imInvController">
-						<div class="row">
-							<div class="s12 col">
-								<br>
-								<form class="forms forms-inline input-field ">
-									<div>
-										<input type="text" class="input-big width-50" id="query"
-											ng-model="query"> <label for="query">Search
-											Inventory</label>
-									</div>
-								</form>
-								<ul class="collection">
-									<li class="collection-item avatar animated fadeInUp"
-										style="-webkit-animation-duration: {{$index* 300"
-										ng-repeat="u in users | filter:query | orderBy:'user.username'">
-										<a href="" ng-click="modalDetails(u.user)"
-										class="modal-trigger title"><img
-											ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle">
-											{{u.user.username}}</a>
-										<p>{{u.user.location.city}}, {{u.user.location.state}}</p> <a
-										href="#!" class="secondary-content" ng-click="removeUser(u)"><i
-											class="small mdi-action-highlight-remove"></i></a>
-									</li>
-								</ul>
+		<div id="test2" class="col s12">
+			<div class="container" ng-controller="imInvController">
+				<div class="row">
+					<div class="s12 col">
+						<br>
+						<form class="forms forms-inline input-field ">
+							<div>
+								<input type="text" class="input-big width-50" id="query"
+									ng-model="query"> <label for="query">Search
+									Inventory</label>
 							</div>
-						</div>
-						<div id="modalDetailsInv" class="modal bottom-sheet">
-							<div class="modal-content">
-								<div class="row">
-									<div class="l2 col">
-										<img ng-src="{{user.picture.medium}}" alt=""
-											class="align-right circle">
-									</div>
-									<div class="l10 col">
-										<h2>{{user.username}}</h2>
-										<label>Type</label> {{user.email}} <br /> <label>Price</label>
-										{{user.phone}} <br />
-										<hr>
-										<label>Serial Number</label> <br /> <label>Date of
-											Purchase</label> {{user.dob}} <br />
-									</div>
-								</div>
+						</form>
+						<ul class="collection">
+							<li class="collection-item avatar animated fadeInUp"
+								style="-webkit-animation-duration: {{$index* 300"
+								ng-repeat="u in users | filter:query | orderBy:'user.username'">
+								<a href="" ng-click="modalDetails(u.user)"
+								class="modal-trigger title"><img
+									ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle">
+									{{u.user.username}}</a>
+								<p>{{u.user.location.city}}, {{u.user.location.state}}</p> <a
+								href="#!" class="secondary-content" ng-click="removeUser(u)"><i
+									class="small mdi-action-highlight-remove"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div id="modalDetailsInv" class="modal bottom-sheet">
+					<div class="modal-content">
+						<div class="row">
+							<div class="l2 col">
+								<img ng-src="{{user.picture.medium}}" alt=""
+									class="align-right circle">
+							</div>
+							<div class="l10 col">
+								<h2>{{user.username}}</h2>
+								<label>Type</label> {{user.email}} <br /> <label>Price</label>
+								{{user.phone}} <br />
+								<hr>
+								<label>Serial Number</label> <br /> <label>Date of
+									Purchase</label> {{user.dob}} <br />
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
 		<div class="modal-footer">
 			<a href="#!"
 				class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
 		</div>
 	</div>
-	
-	
+
+
 	<div id="returnInventoryModal" class="modal">
 		<div class="modal-content">
 			<h4>Return Inventory</h4>
 			<p>A bunch of text</p>
 		</div>
-				<div id="test2" class="col s12">
-					<div class="container" ng-controller="imInvController">
-						<div class="row">
-							<div class="s12 col">
-								<br>
-								<form class="forms forms-inline input-field ">
-									<div>
-										<input type="text" class="input-big width-50" id="query"
-											ng-model="query"> <label for="query">Search
-											Inventory</label>
-									</div>
-								</form>
-								<ul class="collection">
-									<li class="collection-item avatar animated fadeInUp"
-										style="-webkit-animation-duration: {{$index* 300"
-										ng-repeat="u in users | filter:query | orderBy:'user.username'">
-										<a href="" ng-click="modalDetails(u.user)"
-										class="modal-trigger title"><img
-											ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle">
-											{{u.user.username}}</a>
-										<p>{{u.user.location.city}}, {{u.user.location.state}}</p> <a
-										href="#!" class="secondary-content" ng-click="removeUser(u)"><i
-											class="small mdi-action-highlight-remove"></i></a>
-									</li>
-								</ul>
+		<div id="test2" class="col s12">
+			<div class="container" ng-controller="imInvController">
+				<div class="row">
+					<div class="s12 col">
+						<br>
+						<form class="forms forms-inline input-field ">
+							<div>
+								<input type="text" class="input-big width-50" id="query"
+									ng-model="query"> <label for="query">Search
+									Inventory</label>
 							</div>
-						</div>
-						<div id="modalDetailsInv" class="modal bottom-sheet">
-							<div class="modal-content">
-								<div class="row">
-									<div class="l2 col">
-										<img ng-src="{{user.picture.medium}}" alt=""
-											class="align-right circle">
-									</div>
-									<div class="l10 col">
-										<h2>{{user.username}}</h2>
-										<label>Type</label> {{user.email}} <br /> <label>Price</label>
-										{{user.phone}} <br />
-										<hr>
-										<label>Serial Number</label> <br /> <label>Date of
-											Purchase</label> {{user.dob}} <br />
-									</div>
-								</div>
+						</form>
+						<ul class="collection">
+							<li class="collection-item avatar animated fadeInUp"
+								style="-webkit-animation-duration: {{$index* 300"
+								ng-repeat="u in users | filter:query | orderBy:'user.username'">
+								<a href="" ng-click="modalDetails(u.user)"
+								class="modal-trigger title"><img
+									ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle">
+									{{u.user.username}}</a>
+								<p>{{u.user.location.city}}, {{u.user.location.state}}</p> <a
+								href="#!" class="secondary-content" ng-click="removeUser(u)"><i
+									class="small mdi-action-highlight-remove"></i></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div id="modalDetailsInv" class="modal bottom-sheet">
+					<div class="modal-content">
+						<div class="row">
+							<div class="l2 col">
+								<img ng-src="{{user.picture.medium}}" alt=""
+									class="align-right circle">
+							</div>
+							<div class="l10 col">
+								<h2>{{user.username}}</h2>
+								<label>Type</label> {{user.email}} <br /> <label>Price</label>
+								{{user.phone}} <br />
+								<hr>
+								<label>Serial Number</label> <br /> <label>Date of
+									Purchase</label> {{user.dob}} <br />
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
 		<div class="modal-footer">
 			<a href="#!"
 				class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
@@ -610,6 +642,7 @@
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript" src="js/custom.js"></script>
+	<script type="text/javascript" src="js/controllers.js"></script>
 
 
 </body>

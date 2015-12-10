@@ -1,7 +1,7 @@
 //Variable Declaration
 
 
-var version = "Beta v0.1.3";
+var version = "Beta v0.1.4";
 var urlPath = window.location.href+"welcome/hello/";
 $('.timer').countTo();
 
@@ -9,20 +9,18 @@ $(".version").html(version);
 
 
 $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal-trigger').leanModal();
-	
-
-	
-  });
+	// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered	
+	$('.modal-trigger').leanModal();
+	$('select').material_select();
+});
 
 
 
-	$('.datepicker').pickadate({
-	 container: 'body',
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-  });
+$('.datepicker').pickadate({
+	container: 'body',
+	selectMonths: true, // Creates a dropdown to control month
+	selectYears: 15 // Creates a dropdown of 15 years to control year
+});
 
 $(".user").click( function(){
 	$("#inventory_div").slideUp( "slow", function() {});
@@ -70,78 +68,25 @@ $(".inventory").click(function(){
 
 
 
-var imAngular = angular.module('imAngular', []);
-imAngular.controller('imUserController', function ($scope, $http){
-  
-  $http.get('http://localhost:9876/user/getUsers').success(function(data) {
-    $scope.users = data.results;
-  }).error(function(data, status) {
-    alert('get data error!');
-  });
-  
-  $scope.removeUser = function(user){
-     $scope.users.splice($scope.users.indexOf(user),1);
-  };
-  
-  $scope.modalDetails = function(user){
-     $scope.user = user;
-     $('#modalDetailsUser').openModal();
-  };
-  
-});
-
-imAngular.controller('imInvController', function ($scope, $http){
-  
-  $http.get('http://localhost:9876/inventory/getInventory').success(function(data) {
-    $scope.users = data.results;
-  }).error(function(data, status) {
-    alert('get data error!');
-  });
-  
-  $scope.removeUser = function(user){
-     $scope.users.splice($scope.users.indexOf(user),1);
-  };
-  
-  $scope.modalDetails = function(user){
-     $scope.user = user;
-     $('#modalDetailsInv').openModal();
-  };
-  
-});
-
-imAngular.controller('imDetailController', function ($scope, $http){
-  
-  $http.get('http://api.randomuser.me/?results=1').success(function(data) {
-    $scope.users = data.results;
-  }).error(function(data, status) {
-    alert('get data error!');
-  });
-  
-  $scope.removeUser = function(user){
-     $scope.users.splice($scope.users.indexOf(user),1);
-  };
-  
-  $scope.modalDetails = function(user){
-     $scope.user = user;
-     $('#modalDetails').openModal();
-  };
-  
-});
-
 
 
 document.getElementById("file-input").onchange = function () {
-    var reader = new FileReader();
+	var reader = new FileReader();
 
-    reader.onload = function (e) {
-        // get loaded data and render thumbnail.
-        document.getElementById("image").src = e.target.result;
-		
-    };
+	reader.onload = function (e) {
+		// get loaded data and render thumbnail.
+		document.getElementById("image").src = e.target.result;
 
-    // read the image file as a data URL.
-    reader.readAsDataURL(this.files[0]);
+	};
+
+	// read the image file as a data URL.
+	reader.readAsDataURL(this.files[0]);
 };
+
+
+
+
+
 
 
 
