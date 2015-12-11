@@ -324,8 +324,8 @@
 			</h4>
 			<div class="container">
 				<div class="row">
-					<form id="userForm" action="studentFormInsert.php" title=""
-						method="post">
+					<form id="userForm" action="/user/insertUser" title=""
+						method="post" enctype="multipart/form-data">
 						<div class="col s2">
 							<div class="row">
 								<div class="file-field input-field col s1">
@@ -644,6 +644,7 @@
 	<script type="text/javascript" src="js/custom.js"></script>
 	<script type="text/javascript" src="js/controllers.js"></script>
 	<script type="text/javascript" src="js/forms.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script>
 
 
 </body>
