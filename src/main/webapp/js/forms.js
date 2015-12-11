@@ -20,14 +20,14 @@ $(function() {
 				phone_number:$('#userForm input[id="ph"]').val(), email_id: $('#userForm input[id="email"]').val(),
 				blood_group: $('#userForm input[id="bloodGroup"]').val(), doj: $('#userForm input[id="bloodGroup"]').val(),
 				project: $('#userForm input[id="project"]').val(), filePath:"/home/files"};
-		//console.log(user);
+		console.log(user);
 
-		/* Send the data using post */
+		/* Send the data using post 
 		var posting = $.post( url, user );
 
-		/* Alerts the results */
+		 Alerts the results 
 		posting.done(function( data ) {
-        alert('success');
-      });
+        alert('success');*/
+    //  });
 	});
 });
