@@ -153,3 +153,7 @@
     width: 85px;
     cursor: pointer;
 }
+
+.collection{
+	display:none;
+}

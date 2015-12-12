@@ -98,7 +98,7 @@
 								<br>
 								<form class="forms forms-inline input-field ">
 									<div>
-										<input type="text" class="input-big width-50" id="query"
+										<input type="text" onfocus="tab();" class="input-big width-50 tab" id="query"
 											ng-model="query"> <label for="query">Search
 											Users</label>
 									</div>
@@ -153,7 +153,7 @@
 								<br>
 								<form class="forms forms-inline input-field ">
 									<div>
-										<input type="text" class="input-big width-50" id="query"
+										<input type="text" onfocus="tab();" class="input-big width-50 tab" id="query"
 											ng-model="query"> <label for="query">Search
 											Inventory</label>
 									</div>
@@ -161,13 +161,13 @@
 								<ul class="collection">
 									<li class="collection-item avatar animated fadeInUp"
 										style="-webkit-animation-duration: {{$index* 300"
-										ng-repeat="u in users | filter:query | orderBy:'user.username'">
-										<a href="" ng-click="modalDetails(u.user)"
+										ng-repeat="i in inventory | filter:query | orderBy:'inventory.inventoryName'">
+										<a href="" ng-click="modalDetails(i.inventory)"
 										class="modal-trigger title"><img
-											ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle">
-											{{u.user.username}}</a>
-										<p>{{u.user.location.city}}, {{u.user.location.state}}</p> <a
-										href="#!" class="secondary-content" ng-click="removeUser(u)"><i
+											ng-src="{{i.inventory.picture.thumbnail}}" alt="" class="circle">
+											{{i.inventory.inventoryName}}</a>
+										<p>{{i.inventory.serialNumber}}, {{i.inventory.type}}</p> <a
+										href="#!" class="secondary-content" ng-click="removeInventory(i)"><i
 											class="small mdi-action-highlight-remove"></i></a>
 									</li>
 								</ul>
@@ -177,16 +177,16 @@
 							<div class="modal-content">
 								<div class="row">
 									<div class="l2 col">
-										<img ng-src="{{user.picture.medium}}" alt=""
+										<img ng-src="{{inventory.picture.medium}}" alt=""
 											class="align-right circle">
 									</div>
 									<div class="l10 col">
-										<h2>{{user.username}}</h2>
-										<label>Type</label> {{user.email}} <br /> <label>Price</label>
-										{{user.phone}} <br />
+										<h2>{{inventory.inventoryName}}</h2>
+										<label>Type</label> {{inventory.type}} <br /> <label>Price</label> {{inventory.price}}
+										<br />
 										<hr>
-										<label>Serial Number</label> <br /> <label>Date of
-											Purchase</label> {{user.dob}} <br />
+										<label>Serial Number</label> {{inventory.serialNumber}}<br /> <label>Date of
+											Purchase</label> {{inventory.purchaseDate}} <br />
 									</div>
 								</div>
 							</div>
@@ -200,7 +200,7 @@
 								<br>
 								<form class="forms forms-inline input-field ">
 									<div>
-										<input type="text" class="input-big width-50" id="query"
+										<input type="text" onfocus="tab();" class="input-big width-50 tab" id="query"
 											ng-model="query"> <label for="query">Search
 											Details</label>
 									</div>

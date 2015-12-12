@@ -13,6 +13,7 @@ imAngular.controller('imUserController', function ($scope, $http){
 
 	$scope.modalDetails = function(user){
 		$scope.user = user;
+		console.log(user);
 		$('#modalDetailsUser').openModal();
 	};
 
@@ -21,17 +22,18 @@ imAngular.controller('imUserController', function ($scope, $http){
 imAngular.controller('imInvController', function ($scope, $http){
 
 	$http.get('http://localhost:9876/inventory/getInventory').success(function(data) {
-		$scope.users = data.results;
+		$scope.inventory = data.results;
 	}).error(function(data, status) {
 		alert('get data error!');
 	});
 
-	$scope.removeUser = function(user){
-		$scope.users.splice($scope.users.indexOf(user),1);
+	$scope.removeInventory = function(inventory){
+		$scope.inventory.splice($scope.inventory.indexOf(inventory),1);
 	};
 
-	$scope.modalDetails = function(user){
-		$scope.user = user;
+	$scope.modalDetails = function(inventory){
+		$scope.inventory = inventory;
+		console.log($scope.inventory);
 		$('#modalDetailsInv').openModal();
 	};
 
