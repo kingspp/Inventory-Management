@@ -503,13 +503,13 @@
 						<ul class="collection">
 							<li class="collection-item avatar animated fadeInUp"
 								style="-webkit-animation-duration: {{$index* 300"
-								ng-repeat="u in users | filter:query | orderBy:'user.username'">
-								<a href="" ng-click="modalDetails(u.user)"
+								ng-repeat="i in inventory | filter:query | orderBy:'inventory.inventoryName'">
+								<a href="" ng-click="modalDetails(i.inventory)"
 								class="modal-trigger title"><img
-									ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle">
-									{{u.user.username}}</a>
-								<p>{{u.user.location.city}}, {{u.user.location.state}}</p> <a
-								href="#!" class="secondary-content" ng-click="removeUser(u)"><i
+									ng-src="{{i.inventory.picture.thumbnail}}" alt="" class="circle">
+									{{i.inventory.inventoryName}}</a>
+								<p>{{i.inventory.serialNumber}}, {{i.inventory.type}}</p> <a
+								href="#!" class="secondary-content" ng-click="removeUser(i)"><i
 									class="small mdi-action-highlight-remove"></i></a>
 							</li>
 						</ul>
