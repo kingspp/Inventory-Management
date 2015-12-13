@@ -5,10 +5,8 @@ import com.im.domain.User;
 
 public interface IUserDAO {
 
-	public void insertUser( User user );
+    public void deleteUser();
 
-	public void deleteUser();
-
-	public List<User> getAllUsersDao();
+    public List<User> getAllUsersDao();
 
 }

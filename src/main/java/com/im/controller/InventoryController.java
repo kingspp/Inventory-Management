@@ -1,15 +1,18 @@
 package com.im.controller;
 
+import java.util.List;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.im.domain.Inventory;
+import com.im.domain.TransactionDetails;
 import com.im.exception.CustomGenericException;
 import com.im.service.IInventoryService;
 import com.im.utils.JSONResponse;
@@ -19,48 +22,62 @@ import com.im.utils.StringConstants;
 @RequestMapping( "/inventory" )
 public class InventoryController {
 
-	@Autowired
-	IInventoryService iservice;
+    @Autowired
+    IInventoryService iService;
 
-	@RequestMapping( value = "/insertInventory", method = RequestMethod.POST )
-	public JSONResponse insertInventory( Inventory inventory ) throws Exception
-	{
-		try
-		{
-			if( inventory == null )
-			{
-				throw new CustomGenericException(StringConstants.PASS_INVENTORY);
-			}
-			return iservice.insertInventory(inventory);
-		}
-		catch( Exception e )
-		{
-			e.printStackTrace();
-			throw e;
-		}
+    @RequestMapping( value = "/insertInventory", method = RequestMethod.POST )
+    public JSONResponse insertInventory( @RequestBody
+    Inventory inventory ) throws Exception
+    {
+        try
+        {
+            if( inventory == null )
+            {
+                throw new CustomGenericException(StringConstants.PASS_INVENTORY);
+            }
+            return iService.insertInventory(inventory);
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace();
+            throw e;
+        }
 
-	}
+    }
 
-	@RequestMapping( value = "/getInventory", method = RequestMethod.GET )
-	public JSONObject getInventory() throws Exception
-	{
-		try
-		{
-			return iservice.getAllInventories();
-		}
+    @RequestMapping( value = "/getInventory", method = RequestMethod.GET )
+    public JSONObject getInventory() throws Exception
+    {
+        try
+        {
+            return iService.getAllInventories();
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace();
+            throw e;
+        }
+    }
 
-		catch( Exception e )
-		{
-			e.printStackTrace();
-			throw e;
-		}
-	}
+    @RequestMapping( value = "/getTransactions", method = RequestMethod.GET )
+    public List<TransactionDetails> getTransactions() throws Exception
+    {
+        try
+        {
+            return iService.getTransactions();
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace();
+            throw e;
+        }
+    }
 
-	@ExceptionHandler( CustomGenericException.class )
-	public @ResponseBody
-	ResponseEntity<JSONResponse> handleCustomException( CustomGenericException e )
-	{
-		return new ResponseEntity<JSONResponse>(new JSONResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+    @ExceptionHandler( CustomGenericException.class )
+    public @ResponseBody
+    ResponseEntity<JSONResponse> handleCustomException( CustomGenericException e )
+    {
+        return new ResponseEntity<JSONResponse>(new JSONResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }

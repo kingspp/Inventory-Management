@@ -1,13 +1,13 @@
 package com.im.dao;
 
-import org.json.simple.JSONObject;
+import java.util.List;
 import com.im.domain.Inventory;
-import com.im.utils.JSONResponse;
+import com.im.domain.TransactionDetails;
 
 public interface IInventoryDAO {
 
-	public JSONResponse insertInventory( Inventory inventory ) throws Exception;
+    public List<Inventory> getAllInventories() throws Exception;
 
-	public JSONObject getAllInventories() throws Exception;
+    public List<TransactionDetails> getTransactions();
 
 }
