@@ -324,15 +324,14 @@
 			</h4>
 			<div class="container">
 				<div class="row">
-					<form id="userForm" action="/user/insertUser" title=""
-						method="post" enctype="multipart/form-data">
+					<form id="userForm" name="userForm" action="/user/insertUser" method="post" enctype="multipart/form-data">
 						<div class="col s2">
 							<div class="row">
 								<div class="file-field input-field col s1">
 									<div class="image-upload form-field">
 										<label for="file-input"> <img id="image"
 											src="img/sample-user.png" />
-										</label> <input id="file-input" type="file" />
+										</label> <input type="file" id="file-id" name="imageFile"/>
 									</div>
 								</div>
 							</div>
@@ -625,7 +624,10 @@
 		</div>
 	</div>  -->
 
-
+<div>
+<!--  <input type="file" id="file" name="imageFile"/>
+    <button onclick="uploadFile();">Upload</button>
+</div> -->
 		<div class="footer-copyright">
 			<div class="container center">
 				© 2014 Copyright @Razorthink <a
@@ -644,7 +646,6 @@
 	<script type="text/javascript" src="js/custom.js"></script>
 	<script type="text/javascript" src="js/controllers.js"></script>
 	<script type="text/javascript" src="js/forms.js"></script>
-	<script src="http://malsup.github.com/jquery.form.js"></script>
 
 
 </body>

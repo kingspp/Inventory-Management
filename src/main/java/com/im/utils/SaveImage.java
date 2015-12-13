@@ -22,7 +22,7 @@ public class SaveImage {
              * prop.load(input);
              */
             String path = System.getProperty("user.home") + File.separator + "Imanagement" + folderName;
-
+            System.err.println(path);
             File customDir = new File(path);
 
             if( customDir.exists() )

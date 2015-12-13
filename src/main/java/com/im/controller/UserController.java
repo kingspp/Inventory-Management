@@ -16,6 +16,7 @@ import com.im.domain.User;
 import com.im.exception.CustomGenericException;
 import com.im.service.IUserService;
 import com.im.utils.JSONResponse;
+import com.im.utils.SaveImage;
 
 @Controller
 @RequestMapping( "/user" )
@@ -29,19 +30,20 @@ public class UserController {
 
     @RequestMapping( value = "/insertUser", method = RequestMethod.POST )
     public @ResponseBody
-    JSONResponse insertUser( @RequestBody
-    User user, @RequestParam( value = "imageFile", required = false )
+    JSONResponse insertUser( @RequestParam( value = "imageFile", required = false )
     MultipartFile image ) throws Exception
     {
+    	System.err.println("made");
         try
         {
-            if( user == null )
+           /* if( user == null )
             {
                 throw new CustomGenericException("Please pass the user details");
             }
 
-            userService.insertUser(user, image);
-            jsonResponse.setMessage("User successfuly saved");
+            userService.insertUser(user, image);*/
+        	SaveImage.imageSave(image, "/abcd");
+            jsonResponse.setMessage("success");
             return jsonResponse;
 
         }

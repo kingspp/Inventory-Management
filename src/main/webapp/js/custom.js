@@ -21,7 +21,7 @@ $(document).ready(function(){
 });
 
 function tab(){
-	$(".collection").slideDown(200);
+	$(".collection").slideDown(750);
 }
 
 

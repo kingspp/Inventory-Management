@@ -1,54 +1,77 @@
 $(function() {
-	/* $('#userForm').submit(function() {
-    	console.log("in submit");
-      var user = {firstName: $("form[name='userForm'] input[name='first_name']").val()};
-      console.log(JSON.stringify(user));
-        return false;
-    });*/
 
-	// attach a submit handler to the form 
-	/*$("#userForm").submit(function(event) {
-		var $form = $( this ),
-		url = $form.attr( 'action' );
 
-		/*stop form from submitting normally 
-		event.preventDefault();
-
-		 get some values from elements on the page: 
+	/*$("form[name='userForm']").submit(function(e) {
+		e.preventDefault();
 		
-
 		var user = {user_name: $('#userForm input[id="firstName"]').val() + $('#userForm input[id="lastName"]').val(), 
 				phone_number:$('#userForm input[id="ph"]').val(), email_id: $('#userForm input[id="email"]').val(),
 				blood_group: $('#userForm input[id="bloodGroup"]').val(), doj: $('#userForm input[id="bloodGroup"]').val(),
-				project: $('#userForm input[id="project"]').val(), filePath:"/home/files"
-				filePath:	file-input};
+				project: $('#userForm input[id="project"]').val()};
 		console.log(user);
-
-		//Send the data using post 
-		var posting = $.post( url, user );
-
-		//Alerts the results 
-		posting.done(function( data ) {
-			alert('success');
-		});
-		 */
-
-		/*$.ajax({
-			type: "POST",
-			url: url,
-			data: new FormData($('#userForm')),
-			processData: false,
-			contentType: false,
-			success: function (data) {
-				console.log(data);
+		
+		var formData= new FormData();
+		var input = document.getElementById("file-input");
+		file = input.files[0];
+		if(file != undefined){
+			
+			if(!!file.type.match(/image.*//*)){
+				formData.append("imageFile", file);
+				console.log("Image appeneded");
 			}
-		});*/
-	/*	$("#userForm").ajaxSubmit(options); 
-		return false;
+		}
+		
+		 $.ajax({
+            url: "/user/insertUser",
+            type: "POST",
+            data: {imageFile:formData },
+            async: false,
+            success: function (msg) {
+                alert(JSON.stringify(msg));
+                console.log(JSON.stringify(msg));
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+
+
 	});
-	*/
+*/
 	
-	$('#userForm').ajaxForm(function() { 
-        alert("Thank you for your comment!"); 
-    }); 
+
+	$("form[name='userForm']").submit(function(e) {
+		e.preventDefault();
+		var input = document.getElementById("file-id");
+		file = input.files[0];
+		var user = {user_name: $('#userForm input[id="firstName"]').val() + $('#userForm input[id="lastName"]').val(), 
+				phone_number:$('#userForm input[id="ph"]').val(), email_id: $('#userForm input[id="email"]').val(),
+				blood_group: $('#userForm input[id="bloodGroup"]').val(), doj: $('#userForm input[id="bloodGroup"]').val(),
+				project: $('#userForm input[id="project"]').val()};
+		if(file != undefined){
+			formData= new FormData();
+			if(!!file.type.match(/image.*/)){
+				formData.append("image", file);
+				$.ajax({
+					url: "/user/insertUser",
+					type: "POST",
+					data: {userDetails: user, imageFile: formData},
+					processData: false,
+					contentType: false,
+					success: function(data){
+						alert('success');
+					}
+				});
+			}else{
+				alert('Not a valid image!');
+			}
+		}else{
+			alert('Input something!');
+		}
+	});
+	
+	
 });
+
+
+

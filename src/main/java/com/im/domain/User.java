@@ -2,6 +2,7 @@ package com.im.domain;
 
 import java.io.Serializable;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table( name = "user" )
@@ -54,6 +57,8 @@ public class User implements Serializable {
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
     @JoinColumn( name = "user_id" )
     private Set<Inventory> inventory;
+    
+    
 
     public Integer getUserId()
     {
@@ -154,5 +159,7 @@ public class User implements Serializable {
     {
         this.inventory = inventory;
     }
+
+
 
 }
