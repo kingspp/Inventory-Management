@@ -9,14 +9,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+
 import com.im.domain.User;
 import com.im.exception.CustomGenericException;
 import com.im.service.IUserService;
 import com.im.utils.JSONResponse;
-import com.im.utils.SaveImage;
 
 @Controller
 @RequestMapping( "/user" )
@@ -30,19 +28,18 @@ public class UserController {
 
     @RequestMapping( value = "/insertUser", method = RequestMethod.POST )
     public @ResponseBody
-    JSONResponse insertUser( @RequestParam( value = "imageFile", required = false )
-    MultipartFile image ) throws Exception
+    JSONResponse insertUser(@RequestBody User user  ) throws Exception
     {
     	System.err.println("made");
         try
         {
-           /* if( user == null )
+            if( user == null )
             {
                 throw new CustomGenericException("Please pass the user details");
             }
 
-            userService.insertUser(user, image);*/
-        	SaveImage.imageSave(image, "/abcd");
+            userService.insertUser(user, user.getImage());
+        	//SaveImage.imageSave(user.getImage(), "/abcd");
             jsonResponse.setMessage("success");
             return jsonResponse;
 

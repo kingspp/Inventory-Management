@@ -15,6 +15,7 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -58,9 +59,20 @@ public class User implements Serializable {
     @JoinColumn( name = "user_id" )
     private Set<Inventory> inventory;
     
+    @Transient 
+    private MultipartFile image ;
+    
     
 
-    public Integer getUserId()
+    public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+
+	public Integer getUserId()
     {
         return userId;
     }
