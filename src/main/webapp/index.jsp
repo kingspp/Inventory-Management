@@ -3,8 +3,7 @@
 <head>
 <title>IManagement</title>
 <!--Import Google Icon Font-->
-<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
+
 <!--Import materialize.css-->
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
@@ -329,9 +328,9 @@
 							<div class="row">
 								<div class="file-field input-field col s1">
 									<div class="image-upload form-field">
-										<label for="file-input"> <img id="image"
+										<label for="file-input"> <img id="userImage"
 											src="img/sample-user.png" />
-										</label> <input type="file" id="file-id" name="imageFile"/>
+										</label> <input id="imageFile" type="file" name="imageFile" />
 									</div>
 								</div>
 							</div>
@@ -343,13 +342,13 @@
 									<div class="form-field">
 										<i class="material-icons prefix">account_circle</i> <label
 											class="title">First Name</label> <input type="text"
-											id="firstName" class="validate" required>
+											id="userName" name="userName" class="validate" >
 									</div>
 								</div>
 
 								<div class="input-field col s4">
 									<div class="form-field">
-										<input id="lastName" type="text" class="validate" required>
+										<input id="lastName" type="text" class="validate" >
 										<label for="lastName">Last Name</label>
 									</div>
 								</div>
@@ -357,28 +356,28 @@
 							<div class="row">
 								<div class="input-field col s9">
 									<i class="material-icons prefix">email</i> <input id="email"
-										type="email" class="validate" required> <label
+										type="email" class="validate" > <label
 										for="email">Email</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s9">
 									<i class="material-icons prefix">phone</i> <input id="ph"
-										type="number" class="validate" required> <label
+										type="number" class="validate" > <label
 										for="ph">Ph Number</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s5">
 									<i class="material-icons prefix">perm_contact_calendar</i> <input
-										type="date" class="datepicker" required> <label
+										type="date" class="datepicker" > <label
 										for="birthdate" class="">Birthdate</label>
 								</div>
 
 								<div class="input-field col s4">
 									<i class="material-icons prefix">invert_colors</i> <input
 										id="bloodGroup" type="text" pattern="[a-zA-Z][+-]"
-										class="validate" required> <label for="bloodGroup">Blood
+										class="validate" > <label for="bloodGroup">Blood
 										group</label>
 								</div>
 
@@ -386,7 +385,7 @@
 							<div class="row">
 								<div class="input-field col s9">
 									<i class="material-icons prefix">code</i> <input id="project"
-										type="text" class="validate" required> <label
+										type="text" class="validate" > <label
 										for="project">Project</label>
 								</div>
 							</div>
@@ -639,12 +638,13 @@
 
 
 	<script type="text/javascript"
-		src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		src="js/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="js/jquery-countTo.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript" src="js/custom.js"></script>
 	<script type="text/javascript" src="js/controllers.js"></script>
+	<script type="text/javascript" src="js/form2js.js"></script>
 	<script type="text/javascript" src="js/forms.js"></script>
 
 

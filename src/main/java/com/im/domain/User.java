@@ -17,10 +17,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.eclipse.jetty.util.MultiPartInputStreamParser;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table( name = "user" )
+@JsonIgnoreProperties(ignoreUnknown = true)
 @NamedNativeQueries( { @NamedNativeQuery( name = "User.getUsers", query = "select * from user ", resultClass = User.class ) } )
 public class User implements Serializable {
 
@@ -59,18 +63,7 @@ public class User implements Serializable {
     @JoinColumn( name = "user_id" )
     private Set<Inventory> inventory;
     
-    @Transient 
-    private MultipartFile image ;
-    
-    
-
-    public MultipartFile getImage() {
-		return image;
-	}
-
-	public void setImage(MultipartFile image) {
-		this.image = image;
-	}
+   
 
 	public Integer getUserId()
     {

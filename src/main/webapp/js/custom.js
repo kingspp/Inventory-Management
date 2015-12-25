@@ -11,13 +11,7 @@ $(".version").html(version);
 $(document).ready(function(){
 	// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered	
 	$('.modal-trigger').leanModal();
-	$('select').material_select();
-	if($(".tab").is(":focus")){
-		alert("hello");
-		console.log("hi");
-	}
-	
-	
+	$('select').material_select();	
 });
 
 function tab(){
@@ -81,10 +75,11 @@ $(".inventory").click(function(){
 
 document.getElementById("file-input").onchange = function () {
 	var reader = new FileReader();
+	//console.log(document.getElementById("file-input").files[0]);
 
 	reader.onload = function (e) {
 		// get loaded data and render thumbnail.
-		document.getElementById("image").src = e.target.result;
+		document.getElementById("userImage").src = e.target.result;
 
 	};
 
