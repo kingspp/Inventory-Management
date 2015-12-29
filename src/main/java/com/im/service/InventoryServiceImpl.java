@@ -1,14 +1,18 @@
 package com.im.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.im.dao.CommonsDao;
 import com.im.dao.IInventoryDAO;
+import com.im.dao.IUserDAO;
 import com.im.domain.Inventory;
 import com.im.domain.TransactionDetails;
+import com.im.domain.User;
 import com.im.exception.CustomGenericException;
 import com.im.utils.JSONResponse;
 import com.im.utils.StringConstants;
@@ -18,6 +22,9 @@ public class InventoryServiceImpl implements IInventoryService {
 
     @Autowired
     IInventoryDAO iDao;
+    
+    @Autowired
+    IUserDAO uDao;
 
     @Autowired
     CommonsDao commonsDao;
@@ -188,9 +195,60 @@ public class InventoryServiceImpl implements IInventoryService {
 	@Override
 	public JSONResponse addInventoryForUser( Integer inventoryId, Integer userId ) throws Exception
 	{
+		
 		//first check for inventory in inventory table , if exists , make is_busy as 1 n persist it back 
-		//then make a entry in the mapping table
-		return null;
+				//then make a entry in the mapping table
+		try{
+			List<Inventory> listI = iDao.getInventoryForId(inventoryId);
+			if(listI.size()<=0)
+			{
+				throw new CustomGenericException("There is no inventory for the passed id");
+			}
+			List<User> listU = uDao.getUserForId(userId);
+			if(listI.size()<=0)
+			{
+				throw new CustomGenericException("There is no user for the passed id");
+			}
+			
+			listI.get(0).setIsBusy(1);
+			listU.get(0).getInventory().add(listI.get(0));
+			commonsDao.persistObject(listI.get(0));
+			commonsDao.persistObject(listU.get(0));
+			jsonResponse.setMessage(StringConstants.INVENTORY_ASSIGN_SUCCESSFULL);
+	        return jsonResponse;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public JSONResponse removeInventoryForUser( Integer inventoryId, Integer userId ) throws Exception
+	{
+		try{
+			List<Inventory> listI = iDao.getInventoryForId(inventoryId);
+			if(listI.size()<=0)
+			{
+				throw new CustomGenericException("There is no inventory for the passed id");
+			}
+			List<User> listU = uDao.getUserForId(userId);
+			if(listI.size()<=0)
+			{
+				throw new CustomGenericException("There is no user for the passed id");
+			}
+			
+			listI.get(0).setIsBusy(1);
+			listU.get(0).getInventory().remove(listI.get(0));
+			commonsDao.persistObject(listI.get(0));
+			commonsDao.persistObject(listU.get(0));
+			jsonResponse.setMessage(StringConstants.INVENTORY_REMOVAL_SUCCESSFULL);
+			return jsonResponse;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
    

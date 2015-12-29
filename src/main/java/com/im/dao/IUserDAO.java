@@ -9,4 +9,6 @@ public interface IUserDAO {
 
     public List<User> getAllUsersDao();
 
+	public List<User> getUserForId( Integer userId );
+
 }

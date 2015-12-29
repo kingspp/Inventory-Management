@@ -49,4 +49,12 @@ public class InventoryDAOImpl extends CustomEntityManager implements IInventoryD
 		query.setParameter("userId", userId);
         return query.getResultList();
 	}
+
+	@Override
+	public List<Inventory> getInventoryForId( Integer inventoryId )
+	{
+		query = getEntityManager().createNamedQuery("Inventory.getInventoryForId");
+		query.setParameter("inventoryId", inventoryId);
+		return query.getResultList();
+	}
 }

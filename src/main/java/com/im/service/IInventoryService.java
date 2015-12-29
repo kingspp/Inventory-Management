@@ -19,4 +19,6 @@ public interface IInventoryService {
 	public JSONObject getInventoryForUser(Integer userId) throws Exception;
 
 	public JSONResponse addInventoryForUser( Integer inventoryId, Integer userId ) throws Exception;
+
+	public JSONResponse removeInventoryForUser( Integer inventoryId, Integer userId ) throws Exception;
 }

@@ -14,4 +14,6 @@ public interface IInventoryDAO {
 
 	public List<Inventory> getInventoryForUser( Integer userId );
 
+	public List<Inventory> getInventoryForId( Integer inventoryId );
+
 }

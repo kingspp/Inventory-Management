@@ -13,7 +13,9 @@ import javax.persistence.Table;
 @Table( name = "inventory" )
 @NamedNativeQueries( { @NamedNativeQuery( name = "Inventory.getAllInventories", query = "select * from inventory ", resultClass = Inventory.class ),
 					   @NamedNativeQuery( name = "Inventory.getFreeInventories", query = "select * from inventory where is_busy=0", resultClass = Inventory.class ),
-					   @NamedNativeQuery( name = "Inventory.getInventoryForUser", query = "SELECT * FROM inventory AS i INNER JOIN user_inventory AS u ON i.inventory_id=u.inventory_inventory_id WHERE u.user_user_id= :userId ", resultClass = Inventory.class )} )
+					   @NamedNativeQuery( name = "Inventory.getInventoryForUser", query = "SELECT * FROM inventory AS i INNER JOIN user_inventory AS u ON i.inventory_id=u.inventory_inventory_id WHERE u.user_user_id= :userId ", resultClass = Inventory.class ),
+					   @NamedNativeQuery( name = "Inventory.getInventoryForId", query = "select * from inventory where inventory_id= :inventoryId ", resultClass = Inventory.class )
+} )
 public class Inventory {
 
 	@Id

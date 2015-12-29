@@ -27,4 +27,13 @@ public class UserDAOImpl extends CustomEntityManager implements IUserDAO {
         List<User> list = query.getResultList();
         return list;
     }
+
+	@Override
+	public List<User> getUserForId( Integer userId )
+	{
+		 query = getEntityManager().createNamedQuery("User.getUserForId");
+		 query.setParameter("userId", userId);
+		 return query.getResultList();
+	         
+	}
 }

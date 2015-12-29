@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -102,8 +103,8 @@ public class InventoryController {
     	}
     }
     
-    @RequestMapping( value = "/addInventoryForUser", method = RequestMethod.POST )
-    public JSONResponse addInventoryForUser(@QueryParam("eid") Integer inventoryId,@QueryParam("uid") Integer userId) throws Exception
+    @RequestMapping( value = "/addInventoryForUser", method = RequestMethod.GET  )
+    public JSONResponse addInventoryForUser(@RequestParam("iid") Integer inventoryId,@RequestParam("uid") Integer userId) throws Exception
     {
     	try{
     		return iService.addInventoryForUser(inventoryId,userId);
@@ -114,6 +115,20 @@ public class InventoryController {
     		throw e;
     	}
     }
+    
+    @RequestMapping( value = "/removeInventoryForUser", method = RequestMethod.GET  )
+    public JSONResponse removeInventoryForUser(@RequestParam("iid") Integer inventoryId,@RequestParam("uid") Integer userId) throws Exception
+    {
+    	try{
+    		return iService.removeInventoryForUser(inventoryId,userId);
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    		throw e;
+    	}
+    }
+
     
     
     @ExceptionHandler( CustomGenericException.class )

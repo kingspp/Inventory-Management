@@ -25,7 +25,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table( name = "user" )
 @JsonIgnoreProperties(ignoreUnknown = true)
-@NamedNativeQueries( { @NamedNativeQuery( name = "User.getUsers", query = "select * from user ", resultClass = User.class ) } )
+@NamedNativeQueries( { @NamedNativeQuery( name = "User.getUsers", query = "select * from user ", resultClass = User.class ),
+	@NamedNativeQuery( name = "User.getUserForId", query = "select * from user where user_id= :userId", resultClass = User.class )
+
+
+} )
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
