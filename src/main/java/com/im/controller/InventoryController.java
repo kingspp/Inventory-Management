@@ -1,14 +1,16 @@
 package com.im.controller;
 
 import java.util.List;
+import javax.ws.rs.QueryParam;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.im.domain.Inventory;
@@ -26,7 +28,7 @@ public class InventoryController {
     IInventoryService iService;
 
     @RequestMapping( value = "/insertInventory", method = RequestMethod.POST )
-    public JSONResponse insertInventory( @RequestBody
+    public JSONResponse insertInventory( @RequestPart(value ="data")
     Inventory inventory ) throws Exception
     {
         try
@@ -59,6 +61,19 @@ public class InventoryController {
         }
     }
 
+    @RequestMapping( value = "/getFreeInventory", method = RequestMethod.GET )
+    public JSONObject getFreeInventory() throws Exception
+    {
+        try
+        {
+            return iService.getFreeInventories();
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace();
+            throw e;
+        }
+    }
     @RequestMapping( value = "/getTransactions", method = RequestMethod.GET )
     public List<TransactionDetails> getTransactions() throws Exception
     {
@@ -72,7 +87,35 @@ public class InventoryController {
             throw e;
         }
     }
-
+    
+    @RequestMapping( value = "/getInventoryForuser/{userId}", method = RequestMethod.GET )
+    public JSONObject getInventoryForUser(@PathVariable Integer userId) throws Exception
+    {
+    	try
+    	{
+    		return iService.getInventoryForUser(userId);
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    		throw e;
+    	}
+    }
+    
+    @RequestMapping( value = "/addInventoryForUser", method = RequestMethod.POST )
+    public JSONResponse addInventoryForUser(@QueryParam("eid") Integer inventoryId,@QueryParam("uid") Integer userId) throws Exception
+    {
+    	try{
+    		return iService.addInventoryForUser(inventoryId,userId);
+    	}
+    	catch(Exception e)
+    	{
+    		e.printStackTrace();
+    		throw e;
+    	}
+    }
+    
+    
     @ExceptionHandler( CustomGenericException.class )
     public @ResponseBody
     ResponseEntity<JSONResponse> handleCustomException( CustomGenericException e )

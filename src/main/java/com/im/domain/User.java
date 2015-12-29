@@ -60,7 +60,6 @@ public class User implements Serializable {
     private String project;
 
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
-    @JoinColumn( name = "user_id" )
     private Set<Inventory> inventory;
     
    

@@ -36,6 +36,7 @@ public class InventoryServiceImpl implements IInventoryService {
             {
                 throw new CustomGenericException(StringConstants.PASS_INVENTORY);
             }
+            inventory.setIsBusy(0);
             transactionDetails.setMessage(inventory.getInventoryName() + " has been added !!");
             commonsDao.persistObject(inventory);
             commonsDao.persistObject(transactionDetails);
@@ -87,6 +88,44 @@ public class InventoryServiceImpl implements IInventoryService {
             throw e;
         }
     }
+    
+    @SuppressWarnings( "unchecked" )
+   	public JSONObject getFreeInventories() throws Exception
+   	{
+   		 try
+   	        {
+   	            List<Inventory> list = iDao.getFreeInventories();
+   	            if( list.isEmpty() || list.size() < 0 )
+   	            {
+   	                throw new CustomGenericException("All the inventories are busy.Please come back later!");
+   	            }
+   	            JSONObject baseObject = null;
+   	            JSONArray userArray = new JSONArray();
+   	            JSONObject inventory = null;
+   	            JSONObject results = new JSONObject();
+   	            for( int i = 0; i < list.size(); i++ )
+   	            {
+   	                baseObject = new JSONObject();
+   	                baseObject.put("inventoryName", list.get(i).getInventoryName());
+   	                baseObject.put("filePath", list.get(i).getFilePath());
+   	                baseObject.put("price", list.get(i).getPrice());
+   	                baseObject.put("type", list.get(i).getType());
+   	                baseObject.put("serialNumber", list.get(i).getSerialNumber());
+   	                baseObject.put("purchaseDate", list.get(i).getPurchaseDate());
+   	                inventory = new JSONObject();
+   	                inventory.put("inventory", baseObject);
+   	                userArray.add(inventory);
+   	            }
+   	            results.put("results", userArray);
+   	            return results;
+
+   	        }
+   	        catch( Exception e )
+   	        {
+   	            e.printStackTrace();
+   	            throw e;
+   	        }
+   	}
 
     @Override
     public List<TransactionDetails> getTransactions() throws Exception
@@ -107,4 +146,52 @@ public class InventoryServiceImpl implements IInventoryService {
             throw e;
         }
     }
+
+    @SuppressWarnings( "unchecked" )
+    public JSONObject getInventoryForUser(Integer userId) throws Exception
+	{
+		try
+		{
+			List<Inventory> list = iDao.getInventoryForUser(userId);
+			if( list.isEmpty() || list.size() < 0 )
+            {
+                throw new CustomGenericException("You inventories for this user");
+            }
+			JSONObject baseObject = null;
+	            JSONArray userArray = new JSONArray();
+	            JSONObject inventory = null;
+	            JSONObject results = new JSONObject();
+	            for( int i = 0; i < list.size(); i++ )
+	            {
+	                baseObject = new JSONObject();
+	                baseObject.put("inventoryName", list.get(i).getInventoryName());
+	                baseObject.put("filePath", list.get(i).getFilePath());
+	                baseObject.put("price", list.get(i).getPrice());
+	                baseObject.put("type", list.get(i).getType());
+	                baseObject.put("serialNumber", list.get(i).getSerialNumber());
+	                baseObject.put("purchaseDate", list.get(i).getPurchaseDate());
+	                inventory = new JSONObject();
+	                inventory.put("inventory", baseObject);
+	                userArray.add(inventory);
+	            }
+	            results.put("results", userArray);
+	            return results;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public JSONResponse addInventoryForUser( Integer inventoryId, Integer userId ) throws Exception
+	{
+		//first check for inventory in inventory table , if exists , make is_busy as 1 n persist it back 
+		//then make a entry in the mapping table
+		return null;
+	}
+
+   
 }

@@ -1,25 +1,21 @@
 package com.im.controller;
 
 import javax.validation.Valid;
-
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.im.domain.User;
 import com.im.exception.CustomGenericException;
 import com.im.service.IUserService;
 import com.im.utils.JSONResponse;
-import com.im.utils.SaveImage;
 
 @Controller
 
@@ -47,7 +43,6 @@ public class UserController {
             }
 
             userService.insertUser(user, image);
-        	//SaveImage.imageSave(image, "abcd");
             jsonResponse.setMessage("success");
             return jsonResponse;
 
@@ -90,7 +85,7 @@ public class UserController {
     
     
     
-    //////
+   /* //////
     
     
     @RequestMapping(value="/save", method= RequestMethod.POST)
@@ -111,5 +106,5 @@ public class UserController {
             return jsonResponse;
         }
     }
-
+*/
 }

@@ -21,9 +21,9 @@ public class InventoryDAOImpl extends CustomEntityManager implements IInventoryD
     JSONResponse jsonResponse;
 
     @Override
-    public List<Inventory> getAllInventories() throws Exception
+    public List<Inventory> getAllInventories()
     {
-        query = getEntityManager().createNamedQuery("Inventory.getInventories");
+        query = getEntityManager().createNamedQuery("Inventory.getAllInventories");
         return query.getResultList();
 
     }
@@ -34,4 +34,19 @@ public class InventoryDAOImpl extends CustomEntityManager implements IInventoryD
         query = getEntityManager().createNamedQuery("TransactionDetails.getTransactions");
         return query.getResultList();
     }
+
+	@Override
+	public List<Inventory> getFreeInventories()
+	{
+		query = getEntityManager().createNamedQuery("Inventory.getFreeInventories");
+        return query.getResultList();
+	}
+
+	@Override
+	public List<Inventory> getInventoryForUser( Integer userId )
+	{
+		query = getEntityManager().createNamedQuery("Inventory.getInventoryForUser");
+		query.setParameter("userId", userId);
+        return query.getResultList();
+	}
 }

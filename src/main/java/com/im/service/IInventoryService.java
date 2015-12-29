@@ -13,4 +13,10 @@ public interface IInventoryService {
     public JSONObject getAllInventories() throws Exception;
 
     public List<TransactionDetails> getTransactions() throws Exception;
+
+	public JSONObject getFreeInventories() throws Exception;
+
+	public JSONObject getInventoryForUser(Integer userId) throws Exception;
+
+	public JSONResponse addInventoryForUser( Integer inventoryId, Integer userId ) throws Exception;
 }

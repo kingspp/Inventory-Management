@@ -21,7 +21,7 @@ public class SaveImage {
              * input = new FileInputStream("application.properties");
              * prop.load(input);
              */
-            String path = System.getProperty("user.home") + File.separator + "Imanagement" + folderName;
+            String path = System.getProperty("user.home") + File.separator + "Imanagement" + File.separator +folderName;
             System.err.println(path);
             File customDir = new File(path);
 
