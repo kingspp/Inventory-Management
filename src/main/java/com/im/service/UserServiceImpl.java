@@ -68,6 +68,7 @@ public class UserServiceImpl implements IUserService {
             baseObject.put("project", list.get(i).getProject());
             baseObject.put("gender", list.get(i).getGender());
             baseObject.put("phoneNumber", list.get(i).getPhoneNumber());
+            baseObject.put("filePath", list.get(i).getFilePath());
             // baseObject.put("set", list.get(i).getInventory());
             user = new JSONObject();
             user.put("user", baseObject);

@@ -15,7 +15,8 @@ import javax.persistence.Table;
 public class TransactionDetails {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO )
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
+    @Column(name="transaction_id")
     private Integer transactionId;
 
     @Column( name = "message" )

@@ -12,5 +12,10 @@ public class CommonsDao extends CustomEntityManager {
     {
         getEntityManager().persist(object);
     }
+    
+    public void mergeObject(Object ob)
+    {
+    	getEntityManager().merge(ob);
+    }
 
 }

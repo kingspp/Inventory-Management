@@ -1,8 +1,7 @@
 package com.im.service;
 
-import java.util.HashSet;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ public class InventoryServiceImpl implements IInventoryService {
                 throw new CustomGenericException(StringConstants.PASS_INVENTORY);
             }
             inventory.setIsBusy(0);
-            transactionDetails.setMessage(inventory.getInventoryName() + " has been added !!");
+            transactionDetails.setMessage(inventory.getInventoryName() + " has been added to the inventory section!");
             commonsDao.persistObject(inventory);
             commonsDao.persistObject(transactionDetails);
             jsonResponse.setMessage(StringConstants.INVENTORY_SAVE_SUCCESSFULL);
@@ -214,6 +213,9 @@ public class InventoryServiceImpl implements IInventoryService {
 			listU.get(0).getInventory().add(listI.get(0));
 			commonsDao.persistObject(listI.get(0));
 			commonsDao.persistObject(listU.get(0));
+			transactionDetails.setMessage(listI.get(0).getInventoryName()+" has been assigned to "+listU.get(0).getUserName()+" of "+listU.get(0).getProject()+" project on "+new Date());
+			//using 'merge()' here as 'persist()' is making this entity to get detached for an exception
+			commonsDao.mergeObject(transactionDetails);
 			jsonResponse.setMessage(StringConstants.INVENTORY_ASSIGN_SUCCESSFULL);
 	        return jsonResponse;
 		}
@@ -237,11 +239,15 @@ public class InventoryServiceImpl implements IInventoryService {
 			{
 				throw new CustomGenericException("There is no user for the passed id");
 			}
-			
+			//add a validation , a query to check if the combination of passed user id and inventory id is present in the db , 
+			//if not present throw an exception
 			listI.get(0).setIsBusy(1);
 			listU.get(0).getInventory().remove(listI.get(0));
 			commonsDao.persistObject(listI.get(0));
 			commonsDao.persistObject(listU.get(0));
+			transactionDetails.setMessage(listU.get(0).getUserName()+" from "+listU.get(0).getProject()+" project has returned the "+listI.get(0).getInventoryName()+" on "+new Date());
+			//using 'merge()' here as 'persist()' is making this entity to get detached for an exception
+			commonsDao.mergeObject(transactionDetails);
 			jsonResponse.setMessage(StringConstants.INVENTORY_REMOVAL_SUCCESSFULL);
 			return jsonResponse;
 		}

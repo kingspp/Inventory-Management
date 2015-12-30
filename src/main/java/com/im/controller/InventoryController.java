@@ -1,7 +1,6 @@
 package com.im.controller;
 
 import java.util.List;
-import javax.ws.rs.QueryParam;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
