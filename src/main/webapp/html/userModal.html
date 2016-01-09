@@ -1,0 +1,100 @@
+<!-- User Modal>-->
+<div id="userModal" class="modal bottom-sheet">
+	<div class="modal-content">
+		<h4>
+			<i class="fa fa-user-plus" style="font-size: 24px;"></i> User
+		</h4>
+		<div class="container">
+			<div class="row">
+				<form id="userForm" name="userForm" action="/user/insertUser"
+					method="post" enctype="multipart/form-data">
+					<div class="col s2">
+						<div class="row">
+							<div class="file-field input-field col s1">
+								<div class="image-upload form-field">
+									<label for="file-input"> <img id="userImage"
+										src="img/sample-user.png" />
+									</label> <input id="imageFile" type="file" name="imageFile" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col s9">
+						<div class="row">
+							<div class="input-field col s5">
+								<div class="form-field">
+									<i class="material-icons prefix">account_circle</i> <label
+										class="title">First Name</label> <input type="text"
+										id="userName" name="userName" class="validate">
+								</div>
+							</div>
+
+							<div class="input-field col s4">
+								<div class="form-field">
+									<input id="lastName" type="text" class="validate"> <label
+										for="lastName">Last Name</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s9">
+								<i class="material-icons prefix">email</i> <input id="email"
+									type="email" class="validate"> <label for="email">Email</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s9">
+								<i class="material-icons prefix">phone</i> <input id="ph"
+									type="number" class="validate"> <label for="ph">Ph
+									Number</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s5">
+								<i class="material-icons prefix">perm_contact_calendar</i> <input
+									type="date" class="datepicker"> <label for="birthdate"
+									class="">Birthdate</label>
+							</div>
+
+							<div class="input-field col s4">
+								<i class="material-icons prefix">invert_colors</i> <input
+									id="bloodGroup" type="text" pattern="[a-zA-Z][+-]"
+									class="validate"> <label for="bloodGroup">Blood
+									group</label>
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="input-field col s9">
+								<i class="material-icons prefix">code</i> <input id="project"
+									type="text" class="validate"> <label for="project">Project</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s1">
+								<i class="material-icons prefix" style="padding-right: 20px;">person_pin</i>
+							</div>
+							<div class="col s3">
+								<div class="input-field">
+
+									<select class="icons">
+										<option value="" disabled selected>Choose your option</option>
+										<option value="male" data-icon="img/male.png"
+											class="left circle">Male</option>
+										<option value="female" data-icon="img/female.jpg" class="left">Female</option>
+									</select><label>Gender</label>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div id="userSubmit" class="modal-footer">
+						<button type="submit"
+							class="modal-action  waves-effect waves-green btn-flat">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

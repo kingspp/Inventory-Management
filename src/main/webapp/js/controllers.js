@@ -1,7 +1,8 @@
 var imAngular = angular.module('imAngular', []);
+
 imAngular.controller('imUserController', function ($scope, $http){
 
-	$http.get('http://localhost:9876/user/getUsers').success(function(data) {
+	$http.get('user/getUsers').success(function(data) {
 		$scope.users = data.results;
 	}).error(function(data, status) {
 		alert('get data error!');
@@ -21,7 +22,27 @@ imAngular.controller('imUserController', function ($scope, $http){
 
 imAngular.controller('imInvController', function ($scope, $http){
 
-	$http.get('http://localhost:9876/inventory/getInventory').success(function(data) {
+	$http.get('inventory/getInventory').success(function(data) {
+		$scope.inventory = data.results;
+	}).error(function(data, status) {
+		alert('get data error!');
+	});
+
+	$scope.removeInventory = function(inventory){
+		$scope.inventory.splice($scope.inventory.indexOf(inventory),1);
+	};
+
+	$scope.modalDetails = function(inventory){
+		$scope.inventory = inventory;
+		console.log($scope.inventory);
+		$('#modalDetailsInv').openModal();
+	};
+
+});
+
+imAngular.controller('imFreeInvController', function ($scope, $http){
+
+	$http.get('inventory/getFreeInventory').success(function(data) {
 		$scope.inventory = data.results;
 	}).error(function(data, status) {
 		alert('get data error!');
@@ -41,11 +62,11 @@ imAngular.controller('imInvController', function ($scope, $http){
 
 imAngular.controller('imDetailController', function ($scope, $http){
 
-	// $http.get('http://api.randomuser.me/?results=1').success(function(data) {
-	// 	$scope.users = data.results;
-	// }).error(function(data, status) {
-	// 	//alert('get data error!');
-	// });
+	 $http.get('http://api.randomuser.me/?results=1').success(function(data) {
+	 	$scope.users = data.results;
+	 }).error(function(data, status) {
+	 	//alert('get data error!');
+	 });
 
 	$scope.removeUser = function(user){
 		$scope.users.splice($scope.users.indexOf(user),1);

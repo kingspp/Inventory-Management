@@ -1,0 +1,55 @@
+<div id="test1" class="col s12">
+	<div class="container" ng-controller="imUserController">
+		<div class="row">
+			<div class="s12 col">
+				<br>
+				<form class="forms forms-inline input-field ">
+					<div>
+						<input type="text" onfocus="tab();" class="input-big width-50 tab"
+							id="query" ng-model="query"> <label for="query">Search
+							Users</label>
+					</div>
+				</form>
+				<ul class="collection">
+					<li class="collection-item avatar animated fadeInUp"
+						style="-webkit-animation-duration: {{$index* 300"
+						ng-repeat="u in users | filter:query | orderBy:'user.userName'">
+						<a href="" ng-click="modalDetails(u.user)"
+						class="modal-trigger title"><img
+							ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle">
+							{{u.user.userName}}</a>
+						<p>{{u.user.emailId}}, {{u.user.phoneNumber}}</p> <a href="#!"
+						class="secondary-content" ng-click="removeUser(u)"><i
+							class="small mdi-action-highlight-remove"></i></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="modalDetailsUser" class="modal bottom-sheet">
+			<div class="modal-content">
+				<div class="row">
+					<div class="l2 col">
+						<img ng-src="{{user.picture.medium}}" alt=""
+							class="align-right circle">
+					</div>
+					<div class="l10 col">
+						<h2>{{user.userName}}</h2>
+						<label>Email</label> {{user.emailId}} <br /> <label>Phone</label>
+						{{user.phoneNumber}} <br /> <label>Project</label>
+						{{user.project}} <br />
+						<hr>
+						<label>Blood Group</label> {{user.bloodGroup}} <br /> <label>Date
+							of Joining</label> {{user.dob}} <br />
+						<hr>
+						<a class="waves-effect waves-light btn-small modal-trigger"
+							href="#addInventoryModal"><i class="material-icons">add</i>Add
+							Inventory</a>&nbsp&nbsp <a
+							class="waves-effect waves-light btn-small modal-trigger"
+							href="#returnInventoryModal"><i class="material-icons">add</i>Return
+							Inventory</a>&nbsp&nbsp
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

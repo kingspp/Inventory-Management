@@ -1,0 +1,175 @@
+
+<!--Inventory Modal-->
+<div id="invModal" class="modal bottom-sheet">
+	<div class="modal-content">
+		<h4>
+			<i class="material-icons">queue</i></i> Inventory
+		</h4>
+		<div class="container">
+			<div class="row">
+				<form class="col s12">
+					<div class="col s2">
+						<div class="row">
+							<div class="file-field input-field col s1">
+								<div class="image-upload">
+									<label for="file-input"> <img id="image"
+										src="img/sample-user.png" />
+									</label> <input id="file-input" type="file" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col s9">
+						<div class="row">
+							<div class="input-field col s5">
+								<i class="material-icons prefix">shopping_basket</i> <input
+									id="inventory_name" type="text" class="validate"> <label
+									for="inventory_name">First Name</label>
+							</div>
+							<div class="input-field col s4">
+								<input id="type" type="text" class="validate"> <label
+									for="type">Type</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s9">
+								<i class="material-icons prefix">info_outline</i> <input
+									id="snumber" type="text" class="validate"> <label
+									for="snumber">Serial Number</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s9">
+								<i class="material-icons prefix">perm_contact_calendar</i> <input
+									type="date" class="datepicker"> <label for="DOP"
+									class="">Date of Purchase</label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!"
+			class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+	</div>
+</div>
+
+<div id="addInventoryModal" class="modal">
+	<div class="modal-content">
+		<h4>Add Inventory</h4>
+		<p>A bunch of text</p>
+	</div>
+	<div id="test2" class="col s12">
+		<div class="container" ng-controller="imInvController">
+			<div class="row">
+				<div class="s12 col">
+					<br>
+					<form class="forms forms-inline input-field ">
+						<div>
+							<input type="text" class="input-big width-50" id="query"
+								ng-model="query"> <label for="query">Search
+								Inventory</label>
+						</div>
+					</form>
+					<ul class="collection">
+						<li class="collection-item avatar animated fadeInUp"
+							style="-webkit-animation-duration: {{$index* 300"
+							ng-repeat="i in inventory | filter:query | orderBy:'inventory.inventoryName'">
+							<a href="" ng-click="modalDetails(i.inventory)"
+							class="modal-trigger title"><img
+								ng-src="{{i.inventory.picture.thumbnail}}" alt="" class="circle">
+								{{i.inventory.inventoryName}}</a>
+							<p>{{i.inventory.serialNumber}}, {{i.inventory.type}}</p> <a
+							href="#!" class="secondary-content" ng-click="removeUser(i)"><i
+								class="small mdi-action-highlight-remove"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="modalDetailsInv" class="modal bottom-sheet">
+				<div class="modal-content">
+					<div class="row">
+						<div class="l2 col">
+							<img ng-src="{{user.picture.medium}}" alt=""
+								class="align-right circle">
+						</div>
+						<div class="l10 col">
+							<h2>{{user.username}}</h2>
+							<label>Type</label> {{user.email}} <br /> <label>Price</label>
+							{{user.phone}} <br />
+							<hr>
+							<label>Serial Number</label> <br /> <label>Date of
+								Purchase</label> {{user.dob}} <br />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!"
+			class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+	</div>
+</div>
+
+
+<div id="returnInventoryModal" class="modal">
+	<div class="modal-content">
+		<h4>Return Inventory</h4>
+		<p>A bunch of text</p>
+	</div>
+	<div id="test2" class="col s12">
+		<div class="container" ng-controller="imFreeInvController">
+			<div class="row">
+				<div class="s12 col">
+					<br>
+					<form class="forms forms-inline input-field ">
+						<div>
+							<input type="text" class="input-big width-50" id="query"
+								ng-model="query"> <label for="query">Search
+								Inventory</label>
+						</div>
+					</form>
+					<ul class="collection">
+						<li class="collection-item avatar animated fadeInUp"
+							style="-webkit-animation-duration: {{$index* 300"
+							ng-repeat="u in users | filter:query | orderBy:'user.username'">
+							<a href="" ng-click="modalDetails(u.user)"
+							class="modal-trigger title"><img
+								ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle">
+								{{u.user.username}}</a>
+							<p>{{u.user.location.city}}, {{u.user.location.state}}</p> <a
+							href="#!" class="secondary-content" ng-click="removeUser(u)"><i
+								class="small mdi-action-highlight-remove"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="modalDetailsInv" class="modal bottom-sheet">
+				<div class="modal-content">
+					<div class="row">
+						<div class="l2 col">
+							<img ng-src="{{user.picture.medium}}" alt=""
+								class="align-right circle">
+						</div>
+						<div class="l10 col">
+							<h2>{{user.username}}</h2>
+							<label>Type</label> {{user.email}} <br /> <label>Price</label>
+							{{user.phone}} <br />
+							<hr>
+							<label>Serial Number</label> <br /> <label>Date of
+								Purchase</label> {{user.dob}} <br />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!"
+			class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+	</div>
+</div>
