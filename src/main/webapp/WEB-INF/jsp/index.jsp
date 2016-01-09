@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -629,7 +631,7 @@
 </div> -->
 		<div class="footer-copyright">
 			<div class="container center">
-				© 2014 Copyright @Razorthink <a
+				Â© 2014 Copyright @Razorthink <a
 					class="grey-text text-lighten-4 right version" href="#!"></a>
 			</div>
 		</div>
