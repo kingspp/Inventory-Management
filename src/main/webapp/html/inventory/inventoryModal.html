@@ -13,7 +13,7 @@
 							<div class="file-field input-field col s1">
 								<div class="image-upload">
 									<label for="file-input"> <img id="image"
-										src="img/sample-user.png" />
+										src="../../img/sample-user.png" />
 									</label> <input id="file-input" type="file" />
 								</div>
 							</div>
@@ -63,7 +63,7 @@
 		<p>A bunch of text</p>
 	</div>
 	<div id="test2" class="col s12">
-		<div class="container" ng-controller="imInvController">
+		<div class="container" ng-controller="imGetFreeInventory">
 			<div class="row">
 				<div class="s12 col">
 					<br>
@@ -122,7 +122,7 @@
 		<p>A bunch of text</p>
 	</div>
 	<div id="test2" class="col s12">
-		<div class="container" ng-controller="imFreeInvController">
+		<div class="container" ng-controller="imGetInventoryForUser">
 			<div class="row">
 				<div class="s12 col">
 					<br>
@@ -136,13 +136,13 @@
 					<ul class="collection">
 						<li class="collection-item avatar animated fadeInUp"
 							style="-webkit-animation-duration: {{$index* 300"
-							ng-repeat="u in users | filter:query | orderBy:'user.username'">
-							<a href="" ng-click="modalDetails(u.user)"
-							class="modal-trigger title"><img
-								ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle">
-								{{u.user.username}}</a>
-							<p>{{u.user.location.city}}, {{u.user.location.state}}</p> <a
-							href="#!" class="secondary-content" ng-click="removeUser(u)"><i
+							ng-repeat="i in inventory | filter:query | orderBy:'inventory.inventoryName'">
+							<a href="" ng-click="modalDetails(i.inventory)"
+							   class="modal-trigger title"><img
+									ng-src="{{i.inventory.picture.thumbnail}}" alt="" class="circle">
+								{{i.inventory.inventoryName}}</a>
+							<p>{{i.inventory.serialNumber}}, {{i.inventory.type}}</p> <a
+								href="#!" class="secondary-content" ng-click="removeUser(i)"><i
 								class="small mdi-action-highlight-remove"></i></a>
 						</li>
 					</ul>
