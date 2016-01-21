@@ -73,7 +73,7 @@ $(".inventory").click(function(){
 
 
 
-document.getElementById("file-input").onchange = function () {
+document.getElementById("imageFile").onchange = function () {
 	var reader = new FileReader();
 	//console.log(document.getElementById("file-input").files[0]);
 
