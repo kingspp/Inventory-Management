@@ -1,5 +1,6 @@
 package com.im.service;
 
+import java.util.Date;
 import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,69 +17,71 @@ import com.im.utils.SaveImage;
 @Service
 public class UserServiceImpl implements IUserService {
 
-    @Autowired
-    IUserDAO userDao;
+	@Autowired
+	IUserDAO userDao;
 
-    @Autowired
-    CommonsDao commonsDao;
+	@Autowired
+	CommonsDao commonsDao;
 
-    @Autowired
-    JSONResponse jsonResponse;
+	@Autowired
+	JSONResponse jsonResponse;
 
-    TransactionDetails transactionDetails = new TransactionDetails();
+	TransactionDetails transactionDetails = new TransactionDetails();
 
-    public void insertUser( User user, MultipartFile image )
-    {
-        try
-        {
-            String path = SaveImage.imageSave(image, "user");
-            user.setFilePath(path);
-            commonsDao.persistObject(user);
-            transactionDetails.setMessage(user.getUserName() + " has been added !!");
-            commonsDao.persistObject(transactionDetails);
+	public void insertUser( User user, MultipartFile image )
+	{
+		try
+		{
+			String path = SaveImage.imageSave(image, "user");
+			user.setFilePath(path);
+			commonsDao.persistObject(user);
+			transactionDetails.setUserName(user.getUserName());
+			transactionDetails.setMessage(" has been added to the user section on ");
+			transactionDetails.setTime(new Date().getTime());
+			transactionDetails.setFlag("U");
+			commonsDao.persistObject(transactionDetails);
 
-        }
-        catch( Exception e )
-        {
-            e.printStackTrace();
-        }
-    }
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace();
+		}
+	}
 
-    public void deleteUser()
-    {
+	public void deleteUser()
+	{
 
-    }
+	}
 
-    @SuppressWarnings( "unchecked" )
-    public JSONObject getAllUsers()
-    {
-        List<User> list = userDao.getAllUsersDao();
+	@SuppressWarnings( "unchecked" )
+	public JSONObject getAllUsers()
+	{
+		List<User> list = userDao.getAllUsersDao();
 
-        JSONObject baseObject = null;
-        JSONArray userArray = new JSONArray();
-        JSONObject user = null;
-        JSONObject results = new JSONObject();
-        for( int i = 0; i < list.size(); i++ )
-        {
-            baseObject = new JSONObject();
-            baseObject.put("userName", list.get(i).getUserName());
-            baseObject.put("userId", list.get(i).getUserId());
-            baseObject.put("emailId", list.get(i).getEmailId());
-            baseObject.put("bloodGroup", list.get(i).getBloodGroup());
-            baseObject.put("project", list.get(i).getProject());
-            baseObject.put("gender", list.get(i).getGender());
-            baseObject.put("phoneNumber", list.get(i).getPhoneNumber());
-            baseObject.put("filePath", list.get(i).getFilePath());
-            // baseObject.put("set", list.get(i).getInventory());
-            user = new JSONObject();
-            user.put("user", baseObject);
-            userArray.add(user);
-        }
+		JSONObject baseObject = null;
+		JSONArray userArray = new JSONArray();
+		JSONObject user = null;
+		JSONObject results = new JSONObject();
+		for( int i = 0; i < list.size(); i++ )
+		{
+			baseObject = new JSONObject();
+			baseObject.put("userName", list.get(i).getUserName());
+			baseObject.put("userId", list.get(i).getUserId());
+			baseObject.put("emailId", list.get(i).getEmailId());
+			baseObject.put("bloodGroup", list.get(i).getBloodGroup());
+			baseObject.put("project", list.get(i).getProject());
+			baseObject.put("gender", list.get(i).getGender());
+			baseObject.put("phoneNumber", list.get(i).getPhoneNumber());
+			baseObject.put("filePath", list.get(i).getFilePath());
+			// baseObject.put("set", list.get(i).getInventory());
+			user = new JSONObject();
+			user.put("user", baseObject);
+			userArray.add(user);
+		}
 
-        results.put("results", userArray);
-        System.out.println(results);
-        return results;
+		results.put("results", userArray);
+		return results;
 
-    }
+	}
 
 }

@@ -10,7 +10,6 @@ public class WelcomeController {
 	@RequestMapping("/")
 	public String test(Model map)
 	{
-		//ModelAndView m = new ModelAndView("index");
 		 return "index";
 	}
 

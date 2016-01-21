@@ -19,207 +19,222 @@ import com.im.utils.StringConstants;
 @Service
 public class InventoryServiceImpl implements IInventoryService {
 
-    @Autowired
-    IInventoryDAO iDao;
-    
-    @Autowired
-    IUserDAO uDao;
+	@Autowired
+	IInventoryDAO iDao;
 
-    @Autowired
-    CommonsDao commonsDao;
+	@Autowired
+	IUserDAO uDao;
 
-    @Autowired
-    JSONResponse jsonResponse;
+	@Autowired
+	CommonsDao commonsDao;
 
-    TransactionDetails transactionDetails = new TransactionDetails();
+	@Autowired
+	JSONResponse jsonResponse;
 
-    @Override
-    public JSONResponse insertInventory( Inventory inventory ) throws Exception
-    {
-        try
-        {
-            if( inventory == null )
-            {
-                throw new CustomGenericException(StringConstants.PASS_INVENTORY);
-            }
-            inventory.setIsBusy(0);
-            transactionDetails.setMessage(inventory.getInventoryName() + " has been added to the inventory section!");
-            commonsDao.persistObject(inventory);
-            commonsDao.persistObject(transactionDetails);
-            jsonResponse.setMessage(StringConstants.INVENTORY_SAVE_SUCCESSFULL);
-            return jsonResponse;
-        }
+	TransactionDetails transactionDetails = new TransactionDetails();
 
-        catch( Exception e )
-        {
-            e.printStackTrace();
-            throw e;
-        }
-    }
+	@Override
+	public JSONResponse insertInventory( Inventory inventory ) throws Exception
+	{
+		try
+		{
+			if( inventory == null )
+			{
+				throw new CustomGenericException(StringConstants.PASS_INVENTORY);
+			}
+			inventory.setIsBusy(0);
+			transactionDetails.setMessage(" has been added to the inventory section on ");
+			transactionDetails.setInventoryName(inventory.getInventoryName());
+			transactionDetails.setTime(new Date().getTime());
+			transactionDetails.setFlag("I");
+			transactionDetails.setSerialNumber(inventory.getSerialNumber());
+			commonsDao.persistObject(inventory);
+			commonsDao.persistObject(transactionDetails);
+			jsonResponse.setMessage(StringConstants.INVENTORY_SAVE_SUCCESSFULL);
+			return jsonResponse;
+		}
 
-    @SuppressWarnings( "unchecked" )
-    public JSONObject getAllInventories() throws Exception
-    {
-        try
-        {
-            List<Inventory> list = iDao.getAllInventories();
-            if( list.isEmpty() || list.size() < 0 )
-            {
-                throw new CustomGenericException("There are no inventories to be displayed");
-            }
-            JSONObject baseObject = null;
-            JSONArray userArray = new JSONArray();
-            JSONObject inventory = null;
-            JSONObject results = new JSONObject();
-            for( int i = 0; i < list.size(); i++ )
-            {
-                baseObject = new JSONObject();
-                baseObject.put("inventoryName", list.get(i).getInventoryName());
-                baseObject.put("filePath", list.get(i).getFilePath());
-                baseObject.put("price", list.get(i).getPrice());
-                baseObject.put("type", list.get(i).getType());
-                baseObject.put("serialNumber", list.get(i).getSerialNumber());
-                baseObject.put("purchaseDate", list.get(i).getPurchaseDate());
-                inventory = new JSONObject();
-                inventory.put("inventory", baseObject);
-                userArray.add(inventory);
-            }
-            results.put("results", userArray);
-            return results;
+		catch( Exception e )
+		{
+			e.printStackTrace();
+			throw e;
+		}
+	}
 
-        }
-        catch( Exception e )
-        {
-            e.printStackTrace();
-            throw e;
-        }
-    }
-    
-    @SuppressWarnings( "unchecked" )
-   	public JSONObject getFreeInventories() throws Exception
-   	{
-   		 try
-   	        {
-   	            List<Inventory> list = iDao.getFreeInventories();
-   	            if( list.isEmpty() || list.size() < 0 )
-   	            {
-   	                throw new CustomGenericException("All the inventories are busy.Please come back later!");
-   	            }
-   	            JSONObject baseObject = null;
-   	            JSONArray userArray = new JSONArray();
-   	            JSONObject inventory = null;
-   	            JSONObject results = new JSONObject();
-   	            for( int i = 0; i < list.size(); i++ )
-   	            {
-   	                baseObject = new JSONObject();
-   	                baseObject.put("inventoryName", list.get(i).getInventoryName());
-   	                baseObject.put("filePath", list.get(i).getFilePath());
-   	                baseObject.put("price", list.get(i).getPrice());
-   	                baseObject.put("type", list.get(i).getType());
-   	                baseObject.put("serialNumber", list.get(i).getSerialNumber());
-   	                baseObject.put("purchaseDate", list.get(i).getPurchaseDate());
-   	                inventory = new JSONObject();
-   	                inventory.put("inventory", baseObject);
-   	                userArray.add(inventory);
-   	            }
-   	            results.put("results", userArray);
-   	            return results;
+	@SuppressWarnings( "unchecked" )
+	public JSONObject getAllInventories() throws Exception
+	{
+		try
+		{
+			List<Inventory> list = iDao.getAllInventories();
+			if( list.isEmpty() || list.size() < 0 )
+			{
+				throw new CustomGenericException("There are no inventories to be displayed");
+			}
+			JSONObject baseObject = null;
+			JSONArray userArray = new JSONArray();
+			JSONObject inventory = null;
+			JSONObject results = new JSONObject();
+			for( int i = 0; i < list.size(); i++ )
+			{
+				baseObject = new JSONObject();
+				baseObject.put("inventoryName", list.get(i).getInventoryName());
+				baseObject.put("filePath", list.get(i).getFilePath());
+				baseObject.put("price", list.get(i).getPrice());
+				baseObject.put("type", list.get(i).getType());
+				baseObject.put("serialNumber", list.get(i).getSerialNumber());
+				baseObject.put("purchaseDate", list.get(i).getPurchaseDate());
+				inventory = new JSONObject();
+				inventory.put("inventory", baseObject);
+				userArray.add(inventory);
+			}
+			results.put("results", userArray);
+			return results;
 
-   	        }
-   	        catch( Exception e )
-   	        {
-   	            e.printStackTrace();
-   	            throw e;
-   	        }
-   	}
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace();
+			throw e;
+		}
+	}
 
-    @Override
-    public List<TransactionDetails> getTransactions() throws Exception
-    {
-        try
-        {
-            List<TransactionDetails> list = iDao.getTransactions();
-            if( list.isEmpty() || list.size() < 0 )
-            {
-                throw new CustomGenericException("There are no transactions to be displayed");
-            }
-            return list;
+	@SuppressWarnings( "unchecked" )
+	public JSONObject getFreeInventories() throws Exception
+	{
+		try
+		{
+			List<Inventory> list = iDao.getFreeInventories();
+			if( list.isEmpty() || list.size() < 0 )
+			{
+				throw new CustomGenericException("All the inventories are busy.Please come back later!");
+			}
+			JSONObject baseObject = null;
+			JSONArray userArray = new JSONArray();
+			JSONObject inventory = null;
+			JSONObject results = new JSONObject();
+			for( int i = 0; i < list.size(); i++ )
+			{
+				baseObject = new JSONObject();
+				baseObject.put("inventoryName", list.get(i).getInventoryName());
+				baseObject.put("filePath", list.get(i).getFilePath());
+				baseObject.put("price", list.get(i).getPrice());
+				baseObject.put("type", list.get(i).getType());
+				baseObject.put("serialNumber", list.get(i).getSerialNumber());
+				baseObject.put("purchaseDate", list.get(i).getPurchaseDate());
+				inventory = new JSONObject();
+				inventory.put("inventory", baseObject);
+				userArray.add(inventory);
+			}
+			results.put("results", userArray);
+			return results;
 
-        }
-        catch( Exception e )
-        {
-            e.printStackTrace();
-            throw e;
-        }
-    }
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace();
+			throw e;
+		}
+	}
 
-    @SuppressWarnings( "unchecked" )
-    public JSONObject getInventoryForUser(Integer userId) throws Exception
+	@Override
+	public List<TransactionDetails> getTransactions() throws Exception
+	{
+		try
+		{
+			List<TransactionDetails> list = iDao.getTransactions();
+			if( list.isEmpty() || list.size() < 0 )
+			{
+				throw new CustomGenericException("There are no transactions to be displayed");
+			}
+			return list;
+
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@SuppressWarnings( "unchecked" )
+	public JSONObject getInventoryForUser( Integer userId ) throws Exception
 	{
 		try
 		{
 			List<Inventory> list = iDao.getInventoryForUser(userId);
 			if( list.isEmpty() || list.size() < 0 )
-            {
-                throw new CustomGenericException("You inventories for this user");
-            }
+			{
+				throw new CustomGenericException("You inventories for this user");
+			}
 			JSONObject baseObject = null;
-	            JSONArray userArray = new JSONArray();
-	            JSONObject inventory = null;
-	            JSONObject results = new JSONObject();
-	            for( int i = 0; i < list.size(); i++ )
-	            {
-	                baseObject = new JSONObject();
-	                baseObject.put("inventoryName", list.get(i).getInventoryName());
-	                baseObject.put("filePath", list.get(i).getFilePath());
-	                baseObject.put("price", list.get(i).getPrice());
-	                baseObject.put("type", list.get(i).getType());
-	                baseObject.put("serialNumber", list.get(i).getSerialNumber());
-	                baseObject.put("purchaseDate", list.get(i).getPurchaseDate());
-	                inventory = new JSONObject();
-	                inventory.put("inventory", baseObject);
-	                userArray.add(inventory);
-	            }
-	            results.put("results", userArray);
-	            return results;
+			JSONArray userArray = new JSONArray();
+			JSONObject inventory = null;
+			JSONObject results = new JSONObject();
+			for( int i = 0; i < list.size(); i++ )
+			{
+				baseObject = new JSONObject();
+				baseObject.put("inventoryName", list.get(i).getInventoryName());
+				baseObject.put("filePath", list.get(i).getFilePath());
+				baseObject.put("price", list.get(i).getPrice());
+				baseObject.put("type", list.get(i).getType());
+				baseObject.put("serialNumber", list.get(i).getSerialNumber());
+				baseObject.put("purchaseDate", list.get(i).getPurchaseDate());
+				inventory = new JSONObject();
+				inventory.put("inventory", baseObject);
+				userArray.add(inventory);
+			}
+			results.put("results", userArray);
+			return results;
 		}
-		catch(Exception e)
+		catch( Exception e )
 		{
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 	}
 
 	@Override
 	public JSONResponse addInventoryForUser( Integer inventoryId, Integer userId ) throws Exception
 	{
-		
-		//first check for inventory in inventory table , if exists , make is_busy as 1 n persist it back 
-				//then make a entry in the mapping table
-		try{
+
+		// first check for inventory in inventory table , if exists , make
+		// is_busy as 1 n persist it back
+		// then make a entry in the mapping table
+		try
+		{
 			List<Inventory> listI = iDao.getInventoryForId(inventoryId);
-			if(listI.size()<=0)
+			if( listI.size() <= 0 )
 			{
 				throw new CustomGenericException("There is no inventory for the passed id");
 			}
 			List<User> listU = uDao.getUserForId(userId);
-			if(listI.size()<=0)
+			if( listI.size() <= 0 )
 			{
 				throw new CustomGenericException("There is no user for the passed id");
 			}
-			
+
 			listI.get(0).setIsBusy(1);
 			listU.get(0).getInventory().add(listI.get(0));
 			commonsDao.persistObject(listI.get(0));
 			commonsDao.persistObject(listU.get(0));
-			transactionDetails.setMessage(listI.get(0).getInventoryName()+" has been assigned to "+listU.get(0).getUserName()+" of "+listU.get(0).getProject()+" project on "+new Date());
-			//using 'merge()' here as 'persist()' is making this entity to get detached for an exception
+			transactionDetails.setInventoryName(listI.get(0).getInventoryName());
+			transactionDetails.setFlag("B");
+			transactionDetails.setUserName(listU.get(0).getUserName());
+			transactionDetails.setProject(listU.get(0).getProject());
+			transactionDetails.setSerialNumber(listI.get(0).getSerialNumber());
+			transactionDetails.setMessage(listI.get(0).getInventoryName() + " has been assigned to "
+					+ listU.get(0).getUserName() + " of " + listU.get(0).getProject() + " on " + new Date());
+			transactionDetails.setTime(new Date().getTime());
+			// using 'merge()' here as 'persist()' is making this entity to get
+			// detached for an exception
 			commonsDao.mergeObject(transactionDetails);
 			jsonResponse.setMessage(StringConstants.INVENTORY_ASSIGN_SUCCESSFULL);
-	        return jsonResponse;
+			return jsonResponse;
 		}
-		catch(Exception e){
+		catch( Exception e )
+		{
 			e.printStackTrace();
 			throw e;
 		}
@@ -228,34 +243,44 @@ public class InventoryServiceImpl implements IInventoryService {
 	@Override
 	public JSONResponse removeInventoryForUser( Integer inventoryId, Integer userId ) throws Exception
 	{
-		try{
+		try
+		{
 			List<Inventory> listI = iDao.getInventoryForId(inventoryId);
-			if(listI.size()<=0)
+			if( listI.size() <= 0 )
 			{
 				throw new CustomGenericException("There is no inventory for the passed id");
 			}
 			List<User> listU = uDao.getUserForId(userId);
-			if(listI.size()<=0)
+			if( listI.size() <= 0 )
 			{
 				throw new CustomGenericException("There is no user for the passed id");
 			}
-			//add a validation , a query to check if the combination of passed user id and inventory id is present in the db , 
-			//if not present throw an exception
+			// add a validation , a query to check if the combination of passed
+			// user id and inventory id is present in the db ,
+			// if not present throw an exception
 			listI.get(0).setIsBusy(1);
 			listU.get(0).getInventory().remove(listI.get(0));
 			commonsDao.persistObject(listI.get(0));
 			commonsDao.persistObject(listU.get(0));
-			transactionDetails.setMessage(listU.get(0).getUserName()+" from "+listU.get(0).getProject()+" project has returned the "+listI.get(0).getInventoryName()+" on "+new Date());
-			//using 'merge()' here as 'persist()' is making this entity to get detached for an exception
+			transactionDetails.setFlag("B");
+			transactionDetails.setUserName(listU.get(0).getUserName());
+			transactionDetails.setProject(listU.get(0).getProject());
+			transactionDetails.setInventoryName(listI.get(0).getInventoryName());
+			transactionDetails.setTime(new Date().getTime());
+			transactionDetails.setSerialNumber(listI.get(0).getSerialNumber());
+			transactionDetails.setMessage(listU.get(0).getUserName() + " from " + listU.get(0).getProject()
+					+ " project has returned the " + listI.get(0).getInventoryName() + " on " + new Date());
+			// using 'merge()' here as 'persist()' is making this entity to get
+			// detached for an exception
 			commonsDao.mergeObject(transactionDetails);
 			jsonResponse.setMessage(StringConstants.INVENTORY_REMOVAL_SUCCESSFULL);
 			return jsonResponse;
 		}
-		catch(Exception e){
+		catch( Exception e )
+		{
 			e.printStackTrace();
 			throw e;
 		}
 	}
 
-   
 }

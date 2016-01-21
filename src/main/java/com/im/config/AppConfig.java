@@ -18,7 +18,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
@@ -27,85 +26,89 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableTransactionManagement
 public class AppConfig extends WebMvcConfigurerAdapter {
 
-    @Autowired
-    private Environment environment;
-/*
-    @Override
-    public void configureDefaultServletHandling( DefaultServletHandlerConfigurer configurer )
-    {
-        configurer.enable();
-    }*/
+	@Autowired
+	private Environment environment;
 
- /*   @Bean
-    public ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
-        ServletRegistrationBean registration = new ServletRegistrationBean(
-                dispatcherServlet);
-        registration.addUrlMappings("/im");
-        return registration;
-    }*/
-/*    @Bean
-    public ViewResolver getViewResolver(){
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/");
-        resolver.setSuffix(".jsp");
-        return resolver;
-    }*/
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory()
-    {
-        LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
-        entityManager.setDataSource(dataSource());
-        entityManager.setPackagesToScan(new String[] { "com.im.domain" });
+	/*
+	 * @Override
+	 * public void configureDefaultServletHandling(
+	 * DefaultServletHandlerConfigurer configurer )
+	 * {
+	 * configurer.enable();
+	 * }
+	 * @Bean
+	 * public ServletRegistrationBean dispatcherRegistration(DispatcherServlet
+	 * dispatcherServlet) {
+	 * ServletRegistrationBean registration = new ServletRegistrationBean(
+	 * dispatcherServlet);
+	 * registration.addUrlMappings("/im");
+	 * return registration;
+	 * }
+	 * @Bean
+	 * public ViewResolver getViewResolver(){
+	 * InternalResourceViewResolver resolver = new
+	 * InternalResourceViewResolver();
+	 * resolver.setPrefix("/");
+	 * resolver.setSuffix(".jsp");
+	 * return resolver;
+	 * }
+	 */
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory()
+	{
+		LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
+		entityManager.setDataSource(dataSource());
+		entityManager.setPackagesToScan(new String[] { "com.im.domain" });
 
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        entityManager.setJpaVendorAdapter(vendorAdapter);
-        entityManager.setJpaProperties(hibernateProperties());
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		entityManager.setJpaVendorAdapter(vendorAdapter);
+		entityManager.setJpaProperties(hibernateProperties());
 
-        return entityManager;
-    }
+		return entityManager;
+	}
 
-    @Bean
-    public DataSource dataSource()
-    {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
-        dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
-        dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
-        dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
-        return dataSource;
-    }
+	@Bean
+	public DataSource dataSource()
+	{
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
+		dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
+		dataSource.setUsername(environment.getRequiredProperty("jdbc.username"));
+		dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
+		return dataSource;
+	}
 
-    @Bean
-    public CommonsMultipartResolver multipartResolver()
-    {
-        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setDefaultEncoding("utf-8");
-        return resolver;
-    }
+	@Bean
+	public CommonsMultipartResolver multipartResolver()
+	{
+		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+		resolver.setDefaultEncoding("utf-8");
+		return resolver;
+	}
 
-    @Bean
-    public PlatformTransactionManager transactionManager( EntityManagerFactory entityManager )
-    {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManager);
-        return transactionManager;
-    }
+	@Bean
+	public PlatformTransactionManager transactionManager( EntityManagerFactory entityManager )
+	{
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(entityManager);
+		return transactionManager;
+	}
 
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation()
-    {
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation()
+	{
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
 
-    @Bean
-    public Properties hibernateProperties()
-    {
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
-        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
-        properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
-        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
-        return properties;
-    }
+	@Bean
+	public Properties hibernateProperties()
+	{
+		Properties properties = new Properties();
+		properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
+		properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
+		properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
+		properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
+		return properties;
+	}
 
 }

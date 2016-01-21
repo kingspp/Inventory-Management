@@ -48,7 +48,7 @@ public class User implements Serializable {
     private String emailId;
 
     @Column( name = "phone_number" )
-    private Long phoneNumber;
+    private String phoneNumber;
 
     @Column( name = "file_path" )
     private String filePath;
@@ -121,12 +121,12 @@ public class User implements Serializable {
         this.emailId = emailId;
     }
 
-    public Long getPhoneNumber()
+    public String getPhoneNumber()
     {
         return phoneNumber;
     }
 
-    public void setPhoneNumber( Long phoneNumber )
+    public void setPhoneNumber( String phoneNumber )
     {
         this.phoneNumber = phoneNumber;
     }
