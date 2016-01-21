@@ -34,7 +34,7 @@ CREATE TABLE `inventory` (
 
 /*Data for the table `inventory` */
 
-insert  into `inventory`(`inventory_id`,`file_path`,`inventory_name`,`price`,`serial_number`,`purchase_date`,`type`,`is_busy`) values (1,'path','jabra',2000,'j-0001','12-03-2015','Speakers',1),(2,'path','TT Ball',10,'t-0002','12-03-2016','Sports',1),(3,'path','TT Bats',879,'TT-8776','12-03-2015','Sports',1),(4,'path','HP Laptop',45000,'HP-120012','12-03-2015','Electronics',1),(5,'path','Lenovo Laptop',50000,'T410','12-03-2015','Electronics',1),(6,'path','Airtel Dongle',2000,'D-001','12-03-2015','Electronics',0),(7,'path','Docomo Dongle',2000,'D-002','12-03-2015','Electronics',0);
+insert  into `inventory`(`inventory_id`,`file_path`,`inventory_name`,`price`,`serial_number`,`purchase_date`,`type`,`is_busy`) values (1,'path','jabra',2000,'j-0001','12-03-2015','Speakers',1),(2,'path','TT Ball',10,'t-0002','12-03-2016','Sports',1),(3,'path','TT Bat',879,'TT-8776','12-03-2015','Sports',1),(4,'path','HP Laptop',45000,'HP-120012','12-03-2015','Electronics',1),(5,'path','Lenovo Laptop',50000,'T410','12-03-2015','Electronics',1),(6,'path','Airtel Dongle',2000,'D-001','12-03-2015','Electronics',0),(7,'path','Docomo Dongle',2000,'D-002','12-03-2015','Electronics',0);
 
 /*Table structure for table `transaction_details` */
 
@@ -42,13 +42,17 @@ DROP TABLE IF EXISTS `transaction_details`;
 
 CREATE TABLE `transaction_details` (
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `flag` varchar(255) DEFAULT NULL,
+  `inventory_name` varchar(255) DEFAULT NULL,
   `message` varchar(255) DEFAULT NULL,
+  `project` varchar(255) DEFAULT NULL,
+  `serial_number` varchar(255) DEFAULT NULL,
+  `time` bigint(20) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`transaction_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `transaction_details` */
-
-insert  into `transaction_details`(`transaction_id`,`message`) values (15,'TT Ball has been assigned to Pratyush of ML project on Wed Dec 30 12:00:04 IST 2015'),(16,'jabra has been assigned to Pratyush of ML project on Wed Dec 30 12:00:07 IST 2015'),(17,'TT Bats has been assigned to Shreesha of Shreds project on Wed Dec 30 12:00:19 IST 2015'),(18,'Pratyush from ML project has returned the TT Ball on Wed Dec 30 12:00:38 IST 2015'),(19,'TT Ball has been assigned to Shreesha of Shreds project on Wed Dec 30 12:00:48 IST 2015'),(20,'HP Laptop has been assigned to Swamy of Shreds project on Wed Dec 30 12:01:39 IST 2015'),(21,'Lenovo Laptop has been assigned to Abish of Dev-Ops project on Wed Dec 30 12:02:06 IST 2015'),(22,'Swamy from Shreds project has returned the HP Laptop on Wed Dec 30 12:02:17 IST 2015'),(24,'HP Laptop has been assigned to Abish of Dev-Ops project on Wed Dec 30 12:05:14 IST 2015');
 
 /*Table structure for table `user` */
 
@@ -61,7 +65,7 @@ CREATE TABLE `user` (
   `email_id` varchar(255) DEFAULT NULL,
   `file_path` varchar(255) DEFAULT NULL,
   `gender` varchar(255) DEFAULT NULL,
-  `phone_number` bigint(20) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
   `user_name` varchar(255) DEFAULT NULL,
   `project` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
@@ -69,7 +73,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`user_id`,`blood_group`,`doj`,`email_id`,`file_path`,`gender`,`phone_number`,`user_name`,`project`) values (1,'O+ve','15th Aug','pratyush@gandus.com','give you local path','female',778565886,'Pratyush','ML'),(2,'O+ve','15th Aug','Shree@gmail.com','give your local path','male',767657698,'Shreesha','Shreds'),(3,'O+ve','15th Aug','Swamy@gmail.com','give your local path','male',868755869,'Swamy','Shreds'),(4,'O+ve','15th Aug','Abish@gmail.com','give your local path','male',665409867,'Abish','Dev-Ops'),(5,'O+ve','15th Aug','Nitanka ','give your local path','male',897867687,'Nitanka','Dev-Ops');
+insert  into `user`(`user_id`,`blood_group`,`doj`,`email_id`,`file_path`,`gender`,`phone_number`,`user_name`,`project`) values (1,'O+ve','15th Aug','pratyush@gmail.com','give you local path','male','778565886','Pratyush','ML'),(2,'O+ve','15th Aug','Shree@gmail.com','give your local path','male','767657698','Shreesha','Shreds'),(3,'O+ve','15th Aug','Swamy@gmail.com','give your local path','male','868755869','Swamy','Shreds'),(4,'O+ve','15th Aug','Abish@gmail.com','give your local path','male','665409867','Abish','Dev-Ops'),(5,'O+ve','15th Aug','Nitanka ','give your local path','male','897867687','Nitanka','Dev-Ops');
 
 /*Table structure for table `user_inventory` */
 
@@ -85,8 +89,6 @@ CREATE TABLE `user_inventory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `user_inventory` */
-
-insert  into `user_inventory`(`user_user_id`,`inventory_inventory_id`) values (1,1),(2,2),(2,3),(4,4),(4,5);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
