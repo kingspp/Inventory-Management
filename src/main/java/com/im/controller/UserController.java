@@ -82,29 +82,4 @@ public class UserController {
     {
         return new ResponseEntity<JSONResponse>(new JSONResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    
-    
-    
-   /* //////
-    
-    
-    @RequestMapping(value="/save", method= RequestMethod.POST)
-    public @ResponseBody JSONResponse save(
-            @Valid @RequestPart(value="data") User user
-            ,@RequestPart(value = "image", required = false) MultipartFile image
-    ) throws Exception {
-        try {
-        	System.out.println("In try Block");
-        	System.out.println("User:"+ user.getUserName());
-        	System.out.println("Image"+ image.getSize());
-        	jsonResponse.setMessage("success");
-            return jsonResponse;
-
-            
-        }  catch(Exception e) {
-        	jsonResponse.setMessage("fail");
-            return jsonResponse;
-        }
-    }
-*/
 }
