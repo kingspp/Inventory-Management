@@ -1,5 +1,5 @@
 /*
-SQLyog Community v8.7 RC
+SQLyog Community v12.09 (64 bit)
 MySQL - 5.5.46-0ubuntu0.14.04.2 : Database - imanagement
 *********************************************************************
 */
@@ -73,7 +73,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`user_id`,`blood_group`,`doj`,`email_id`,`file_path`,`gender`,`phone_number`,`user_name`,`project`) values (1,'O+ve','15th Aug','pratyush@gmail.com','give you local path','male','778565886','Pratyush','ML'),(2,'O+ve','15th Aug','Shree@gmail.com','give your local path','male','767657698','Shreesha','Shreds'),(3,'O+ve','15th Aug','Swamy@gmail.com','give your local path','male','868755869','Swamy','Shreds'),(4,'O+ve','15th Aug','Abish@gmail.com','give your local path','male','665409867','Abish','Dev-Ops'),(5,'O+ve','15th Aug','Nitanka ','give your local path','male','897867687','Nitanka','Dev-Ops');
+insert  into `user`(`user_id`,`blood_group`,`doj`,`email_id`,`file_path`,`gender`,`phone_number`,`user_name`,`project`) values (1,'O+ve','15th Aug','pratyush@gmail.com','user1.jgp','male','778565886','Pratyush','ML'),(2,'O+ve','15th Aug','Shree@gmail.com','user2.jpg','male','767657698','Shreesha','Shreds'),(3,'O+ve','15th Aug','Swamy@gmail.com','user3.jpg','male','868755869','Swamy','Shreds'),(4,'O+ve','15th Aug','Abish@gmail.com','user4.jpg','male','665409867','Abish','Dev-Ops'),(5,'O+ve','15th Aug','Nitanka ','user5.jpg','male','897867687','Nitanka','Dev-Ops');
 
 /*Table structure for table `user_inventory` */
 

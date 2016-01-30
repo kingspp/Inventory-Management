@@ -6,6 +6,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import com.im.dao.CommonsDao;
 import com.im.dao.IInventoryDAO;
 import com.im.dao.IUserDAO;
@@ -14,6 +15,7 @@ import com.im.domain.TransactionDetails;
 import com.im.domain.User;
 import com.im.exception.CustomGenericException;
 import com.im.utils.JSONResponse;
+import com.im.utils.SaveImage;
 import com.im.utils.StringConstants;
 
 @Service
@@ -34,7 +36,7 @@ public class InventoryServiceImpl implements IInventoryService {
 	TransactionDetails transactionDetails = new TransactionDetails();
 
 	@Override
-	public JSONResponse insertInventory( Inventory inventory ) throws Exception
+	public JSONResponse insertInventory( Inventory inventory,MultipartFile image ) throws Exception
 	{
 		try
 		{
@@ -42,6 +44,8 @@ public class InventoryServiceImpl implements IInventoryService {
 			{
 				throw new CustomGenericException(StringConstants.PASS_INVENTORY);
 			}
+			String path = SaveImage.imageSave(image, "inventory");
+			inventory.setFilePath(path);
 			inventory.setIsBusy(0);
 			transactionDetails.setMessage(" has been added to the inventory section on ");
 			transactionDetails.setInventoryName(inventory.getInventoryName());

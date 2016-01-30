@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import com.im.domain.Inventory;
 import com.im.domain.TransactionDetails;
 import com.im.exception.CustomGenericException;
@@ -29,7 +30,7 @@ public class InventoryController {
 
     @RequestMapping( value = "/insertInventory", method = RequestMethod.POST )
     public JSONResponse insertInventory( @RequestPart(value ="data")
-    Inventory inventory ) throws Exception
+    Inventory inventory  ,@RequestPart(value = "image", required = false) MultipartFile image) throws Exception
     {
         try
         {
@@ -37,7 +38,7 @@ public class InventoryController {
             {
                 throw new CustomGenericException(StringConstants.PASS_INVENTORY);
             }
-            return iService.insertInventory(inventory);
+            return iService.insertInventory(inventory,image);
         }
         catch( Exception e )
         {
