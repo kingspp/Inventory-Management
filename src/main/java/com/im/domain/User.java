@@ -55,7 +55,8 @@ public class User implements Serializable {
 
     @Column( name = "project" )
     private String project;
-
+    
+ 
     @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
     private Set<Inventory> inventory;
     
@@ -161,6 +162,7 @@ public class User implements Serializable {
         this.inventory = inventory;
     }
 
+	
 
 
 }

@@ -57,4 +57,6 @@ public class InventoryDAOImpl extends CustomEntityManager implements IInventoryD
 		query.setParameter("inventoryId", inventoryId);
 		return query.getResultList();
 	}
+	
+	
 }

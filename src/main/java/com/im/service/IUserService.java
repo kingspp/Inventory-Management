@@ -8,8 +8,8 @@ public interface IUserService {
 
     public void insertUser( User user, MultipartFile image );
 
-    public void deleteUser();
-
     public JSONObject getAllUsers();
+
+	public String removeUser( Integer userId ) throws Exception;
 
 }

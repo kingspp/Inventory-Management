@@ -15,9 +15,9 @@ public class UserDAOImpl extends CustomEntityManager implements IUserDAO {
     private Query query;
     TransactionDetails transactionDetails = new TransactionDetails();
 
-    public void deleteUser()
+    public void deleteUser(User user)
     {
-
+    	getEntityManager().remove(user);
     }
 
     @SuppressWarnings( "unchecked" )

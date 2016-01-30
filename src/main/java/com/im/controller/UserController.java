@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -22,64 +23,74 @@ import com.im.utils.JSONResponse;
 @RequestMapping( "/user" )
 public class UserController {
 
-    @Autowired
-    IUserService userService;
+	@Autowired
+	IUserService userService;
 
-    @Autowired
-    JSONResponse jsonResponse;
+	@Autowired
+	JSONResponse jsonResponse;
 
-    @RequestMapping( value = "/insertUser", method = RequestMethod.POST )
-    public @ResponseBody
-    JSONResponse insertUser(
-            @Valid @RequestPart(value="data") User user
-            ,@RequestPart(value = "image", required = false) MultipartFile image
-    ) throws Exception {
-    
-        try
-        {
-            if( user == null )
-            {
-                throw new CustomGenericException("Please pass the user details");
-            }
+	@RequestMapping( value = "/insertUser", method = RequestMethod.POST )
+	public @ResponseBody JSONResponse insertUser( @Valid @RequestPart( value = "data" ) User user,
+			@RequestPart( value = "image", required = false ) MultipartFile image) throws Exception
+	{
 
-            userService.insertUser(user, image);
-            jsonResponse.setMessage("success");
-            return jsonResponse;
+		try
+		{
+			if( user == null )
+			{
+				throw new CustomGenericException("Please pass the user details");
+			}
 
-        }
-        catch( Exception e )
-        {
-            e.printStackTrace();
-            throw e;
-        }
+			userService.insertUser(user, image);
+			jsonResponse.setMessage("success");
+			return jsonResponse;
 
-    }
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace();
+			throw e;
+		}
 
-    @RequestMapping( value = "/getUsers", method = RequestMethod.GET )
-    public @ResponseBody
-    JSONObject getAllUsers() throws Exception
-    {
-        try
-        {
-            JSONObject o = userService.getAllUsers();
-            if( o.isEmpty() || o.size() <= 0 )
-            {
-                throw new CustomGenericException("There are no users registered");
-            }
-            return o;
+	}
 
-        }
-        catch( Exception e )
-        {
-            e.printStackTrace();
-            throw e;
-        }
-    }
+	@RequestMapping( value = "/getUsers", method = RequestMethod.GET )
+	public @ResponseBody JSONObject getAllUsers() throws Exception
+	{
+		try
+		{
+			JSONObject o = userService.getAllUsers();
+			if( o.isEmpty() || o.size() <= 0 )
+			{
+				throw new CustomGenericException("There are no users registered");
+			}
+			return o;
 
-    @ExceptionHandler( CustomGenericException.class )
-    public @ResponseBody
-    ResponseEntity<JSONResponse> handleCustomException( CustomGenericException e )
-    {
-        return new ResponseEntity<JSONResponse>(new JSONResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@RequestMapping( value = "/removeUser/{userId}", method = RequestMethod.GET )
+	public @ResponseBody String removeUser( @PathVariable Integer userId ) throws Exception
+	{
+		try
+		{
+			return userService.removeUser(userId);
+		}
+		catch( Exception e )
+		{
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@ExceptionHandler( CustomGenericException.class )
+	public @ResponseBody ResponseEntity<JSONResponse> handleCustomException( CustomGenericException e )
+	{
+		return new ResponseEntity<JSONResponse>(new JSONResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }

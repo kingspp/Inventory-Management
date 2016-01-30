@@ -45,7 +45,8 @@ public class SaveImage {
 				out = new BufferedOutputStream(new FileOutputStream(filePath));
 				out.write(bytes);
 				out.close();
-				return ((Long)date.getTime()).toString();
+				return "Imanagement" + File.separator + folderName + File.separator
+						+ ((Long) date.getTime()).toString();
 			}
 			else
 			{

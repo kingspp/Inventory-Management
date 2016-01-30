@@ -47,11 +47,8 @@ public class InventoryServiceImpl implements IInventoryService {
 			String path = SaveImage.imageSave(image, "inventory");
 			inventory.setFilePath(path);
 			inventory.setIsBusy(0);
-			transactionDetails.setMessage(" has been added to the inventory section on ");
-			transactionDetails.setInventoryName(inventory.getInventoryName());
+			transactionDetails.setMessage(inventory.getInventoryName()+"-"+inventory.getSerialNumber()+" has been added to the inventory section ");
 			transactionDetails.setTime(new Date().getTime());
-			transactionDetails.setFlag("I");
-			transactionDetails.setSerialNumber(inventory.getSerialNumber());
 			commonsDao.persistObject(inventory);
 			commonsDao.persistObject(transactionDetails);
 			jsonResponse.setMessage(StringConstants.INVENTORY_SAVE_SUCCESSFULL);
@@ -223,13 +220,8 @@ public class InventoryServiceImpl implements IInventoryService {
 			listU.get(0).getInventory().add(listI.get(0));
 			commonsDao.persistObject(listI.get(0));
 			commonsDao.persistObject(listU.get(0));
-			transactionDetails.setInventoryName(listI.get(0).getInventoryName());
-			transactionDetails.setFlag("B");
-			transactionDetails.setUserName(listU.get(0).getUserName());
-			transactionDetails.setProject(listU.get(0).getProject());
-			transactionDetails.setSerialNumber(listI.get(0).getSerialNumber());
 			transactionDetails.setMessage(listI.get(0).getInventoryName() + " has been assigned to "
-					+ listU.get(0).getUserName() + " of " + listU.get(0).getProject() + " on " + new Date());
+					+ listU.get(0).getUserName() + " of " + listU.get(0).getProject() );
 			transactionDetails.setTime(new Date().getTime());
 			// using 'merge()' here as 'persist()' is making this entity to get
 			// detached for an exception
@@ -266,14 +258,9 @@ public class InventoryServiceImpl implements IInventoryService {
 			listU.get(0).getInventory().remove(listI.get(0));
 			commonsDao.persistObject(listI.get(0));
 			commonsDao.persistObject(listU.get(0));
-			transactionDetails.setFlag("B");
-			transactionDetails.setUserName(listU.get(0).getUserName());
-			transactionDetails.setProject(listU.get(0).getProject());
-			transactionDetails.setInventoryName(listI.get(0).getInventoryName());
-			transactionDetails.setTime(new Date().getTime());
-			transactionDetails.setSerialNumber(listI.get(0).getSerialNumber());
+			
 			transactionDetails.setMessage(listU.get(0).getUserName() + " from " + listU.get(0).getProject()
-					+ " project has returned the " + listI.get(0).getInventoryName() + " on " + new Date());
+					+ " project has returned the " + listI.get(0).getInventoryName() );
 			// using 'merge()' here as 'persist()' is making this entity to get
 			// detached for an exception
 			commonsDao.mergeObject(transactionDetails);

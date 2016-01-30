@@ -26,23 +26,8 @@ public class TransactionDetails implements Serializable {
 	@Column( name = "message" )
 	private String message;
 
-	@Column( name = "user_name" )
-	private String userName;
-
 	@Column( name = "time" )
 	private Long time;
-
-	@Column( name = "project" )
-	private String project;
-
-	@Column( name = "inventory_name" )
-	private String inventoryName;
-
-	@Column( name = "serial_number" )
-	private String serialNumber;
-
-	@Column( name = "flag" )
-	private String flag;
 
 	public Integer getTransactionId()
 	{
@@ -64,46 +49,6 @@ public class TransactionDetails implements Serializable {
 		this.message = message;
 	}
 
-	public String getUserName()
-	{
-		return userName;
-	}
-
-	public void setUserName( String userName )
-	{
-		this.userName = userName;
-	}
-
-	public String getProject()
-	{
-		return project;
-	}
-
-	public void setProject( String project )
-	{
-		this.project = project;
-	}
-
-	public String getInventoryName()
-	{
-		return inventoryName;
-	}
-
-	public void setInventoryName( String inventoryName )
-	{
-		this.inventoryName = inventoryName;
-	}
-
-	public String getFlag()
-	{
-		return flag;
-	}
-
-	public void setFlag( String flag )
-	{
-		this.flag = flag;
-	}
-
 	public Long getTime()
 	{
 		return time;
@@ -112,16 +57,6 @@ public class TransactionDetails implements Serializable {
 	public void setTime( Long time )
 	{
 		this.time = time;
-	}
-
-	public String getSerialNumber()
-	{
-		return serialNumber;
-	}
-
-	public void setSerialNumber( String serialNumber )
-	{
-		this.serialNumber = serialNumber;
 	}
 
 }

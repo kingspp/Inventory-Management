@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.im.dao.CommonsDao;
+import com.im.dao.IInventoryDAO;
 import com.im.dao.IUserDAO;
+import com.im.domain.Inventory;
 import com.im.domain.TransactionDetails;
 import com.im.domain.User;
+import com.im.exception.CustomGenericException;
 import com.im.utils.JSONResponse;
 import com.im.utils.SaveImage;
 
@@ -19,6 +22,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	IUserDAO userDao;
+	
+	@Autowired
+	IInventoryDAO iDao;
 
 	@Autowired
 	CommonsDao commonsDao;
@@ -35,10 +41,8 @@ public class UserServiceImpl implements IUserService {
 			String path = SaveImage.imageSave(image, "user");
 			user.setFilePath(path);
 			commonsDao.persistObject(user);
-			transactionDetails.setUserName(user.getUserName());
-			transactionDetails.setMessage(" has been added to the user section on ");
+			transactionDetails.setMessage(user.getUserName()+" has been added to the user section ");
 			transactionDetails.setTime(new Date().getTime());
-			transactionDetails.setFlag("U");
 			commonsDao.persistObject(transactionDetails);
 
 		}
@@ -48,10 +52,7 @@ public class UserServiceImpl implements IUserService {
 		}
 	}
 
-	public void deleteUser()
-	{
-
-	}
+	
 
 	@SuppressWarnings( "unchecked" )
 	public JSONObject getAllUsers()
@@ -82,6 +83,36 @@ public class UserServiceImpl implements IUserService {
 		results.put("results", userArray);
 		return results;
 
+	}
+
+	@Override
+	public String removeUser( Integer userId ) throws Exception
+	{
+		try
+		{
+			List<Inventory> listInventory = iDao.getInventoryForUser(userId);
+			if(!( listInventory.size()==0))
+			{
+				throw new CustomGenericException("Please remove all the assigned inventories before removing the user");
+			}
+			
+			List<User> listUser = userDao.getUserForId(userId);
+			if(listUser==null || listUser.size()==0)
+			{
+				throw new CustomGenericException("No user for the passed ID");
+			}
+			userDao.deleteUser(listUser.get(0));
+			transactionDetails.setMessage(listUser.get(0).getUserName()+" has been removed from the user section");
+			transactionDetails.setTime(new Date().getTime());
+			commonsDao.persistObject(transactionDetails);
+			return "successfully removed user";
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			throw e;
+		}
+		
 	}
 
 }
