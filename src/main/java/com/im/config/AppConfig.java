@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -19,6 +21,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 
 @Configuration
 @ComponentScan( basePackages = "com.im" )
@@ -53,6 +56,22 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	 * return resolver;
 	 * }
 	 */
+	
+	  @Bean
+	    public AnnotationMethodHandlerAdapter annotationMethodHandlerAdapter()
+	    {
+	        final AnnotationMethodHandlerAdapter annotationMethodHandlerAdapter = new AnnotationMethodHandlerAdapter();
+	        final MappingJackson2HttpMessageConverter mappingJacksonHttpMessageConverter = new MappingJackson2HttpMessageConverter();
+
+	        HttpMessageConverter<?>[] httpMessageConverter = { mappingJacksonHttpMessageConverter };
+
+	        String[] supportedHttpMethods = { "POST", "GET", "HEAD" };
+
+	        annotationMethodHandlerAdapter.setMessageConverters(httpMessageConverter);
+	        annotationMethodHandlerAdapter.setSupportedMethods(supportedHttpMethods);
+
+	        return annotationMethodHandlerAdapter;
+	    }
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory()
 	{

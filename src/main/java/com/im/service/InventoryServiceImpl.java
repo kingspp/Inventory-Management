@@ -166,7 +166,7 @@ public class InventoryServiceImpl implements IInventoryService {
 			List<Inventory> list = iDao.getInventoryForUser(userId);
 			if( list.isEmpty() || list.size() < 0 )
 			{
-				throw new CustomGenericException("You inventories for this user");
+				throw new CustomGenericException("No inventories for this user");
 			}
 			JSONObject baseObject = null;
 			JSONArray userArray = new JSONArray();

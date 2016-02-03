@@ -88,7 +88,7 @@ $(function() {
 		    url:     "/user/insertUser",
 		    type:    'POST',
 		    processData: false,
-		    contentType: false,
+		    contentType: "multipart/form-data",
 		    cache: false,
 		    data:    formData,
 		    error: function(xhr,status,err){

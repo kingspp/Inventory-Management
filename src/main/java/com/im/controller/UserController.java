@@ -23,74 +23,82 @@ import com.im.utils.JSONResponse;
 @RequestMapping( "/user" )
 public class UserController {
 
-	@Autowired
-	IUserService userService;
+    @Autowired
+    IUserService userService;
 
-	@Autowired
-	JSONResponse jsonResponse;
+    @Autowired
+    JSONResponse jsonResponse;
 
-	@RequestMapping( value = "/insertUser", method = RequestMethod.POST )
-	public @ResponseBody JSONResponse insertUser( @Valid @RequestPart( value = "data" ) User user,
-			@RequestPart( value = "image", required = false ) MultipartFile image) throws Exception
-	{
+    @RequestMapping( value = "/insertUser", method = RequestMethod.POST ,headers = "content-type=multipart/*")
+    public @ResponseBody
+    JSONResponse insertUser(
+            @Valid @RequestPart(value="data") User user
+            , @RequestPart(value = "image", required = false) MultipartFile image
+    ) throws Exception {
+    
+        try
+        {
+            if( user == null )
+            {
+                throw new CustomGenericException("Please pass the user details");
+            }
 
-		try
-		{
-			if( user == null )
-			{
-				throw new CustomGenericException("Please pass the user details");
-			}
+           // userService.insertUser(user, image);
+            jsonResponse.setMessage("success");
+            return jsonResponse;
 
-			userService.insertUser(user, image);
-			jsonResponse.setMessage("success");
-			return jsonResponse;
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace();
+            throw e;
+        }
 
-		}
-		catch( Exception e )
-		{
-			e.printStackTrace();
-			throw e;
-		}
+    }
 
-	}
+    @RequestMapping( value = "/getUsers", method = RequestMethod.GET )
+    public @ResponseBody
+    JSONObject getAllUsers() throws Exception
+    {
+        try
+        {
+            JSONObject o = userService.getAllUsers();
+            if( o.isEmpty() || o.size() <= 0 )
+            {
+                throw new CustomGenericException("There are no users registered");
+            }
+            return o;
 
-	@RequestMapping( value = "/getUsers", method = RequestMethod.GET )
-	public @ResponseBody JSONObject getAllUsers() throws Exception
-	{
-		try
-		{
-			JSONObject o = userService.getAllUsers();
-			if( o.isEmpty() || o.size() <= 0 )
-			{
-				throw new CustomGenericException("There are no users registered");
-			}
-			return o;
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+    
+    @RequestMapping( value = "/removeUser/{userId}", method = RequestMethod.GET )
+    public @ResponseBody
+    String removeUser(@PathVariable Integer userId) throws Exception
+    {
+        try
+        {
+        return userService.removeUser(userId);
 
-		}
-		catch( Exception e )
-		{
-			e.printStackTrace();
-			throw e;
-		}
-	}
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+    
+    
 
-	@RequestMapping( value = "/removeUser/{userId}", method = RequestMethod.GET )
-	public @ResponseBody String removeUser( @PathVariable Integer userId ) throws Exception
-	{
-		try
-		{
-			return userService.removeUser(userId);
-		}
-		catch( Exception e )
-		{
-			e.printStackTrace();
-			throw e;
-		}
-	}
-
-	@ExceptionHandler( CustomGenericException.class )
-	public @ResponseBody ResponseEntity<JSONResponse> handleCustomException( CustomGenericException e )
-	{
-		return new ResponseEntity<JSONResponse>(new JSONResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+    @ExceptionHandler( CustomGenericException.class )
+    public @ResponseBody
+    ResponseEntity<JSONResponse> handleCustomException( CustomGenericException e )
+    {
+        return new ResponseEntity<JSONResponse>(new JSONResponse(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
